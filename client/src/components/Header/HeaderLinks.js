@@ -22,30 +22,39 @@ import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js
 import { connect } from "react-redux";
 import { logoutAction } from "views/LoginPage/action";
 import { ADMIN } from "utils/constants";
+import { useTranslation } from "react-i18next";
+import i18n from "i18n";
+import { LANG_TR, LANG_EN } from "utils/constants";
 const useStyles = makeStyles(styles);
 const HeaderLinks = ({ isLogin, user, logoutAction: _logoutAction, role }) => {
+  const { t } = useTranslation();
   const classes = useStyles();
   let navigate = useNavigate();
   const logout = () => {
     _logoutAction();
     navigate("/");
   };
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
+
   return (
     <List className={classes.list} style={{ display: "flex" }}>
       <ListItem className={classes.listItem}>
         <Link to="/" className={classes.navLink}>
-          Anasayfa
+          {t("header.homepage")}
         </Link>
       </ListItem>
       <ListItem className={classes.listItem}>
         <Link to="/" className={classes.navLink}>
-          Doktorlarımız
+          {t("header.doctors")}
         </Link>
       </ListItem>
       <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
-          buttonText="Bölümlerimiz"
+          buttonText={t("header.departments")}
           buttonProps={{
             className: classes.navLink,
             color: "transparent",
@@ -60,10 +69,9 @@ const HeaderLinks = ({ isLogin, user, logoutAction: _logoutAction, role }) => {
       </ListItem>
       <ListItem className={classes.listItem}>
         <Link to="/" className={classes.navLink}>
-          Randevu
+          {t("header.appointment")}
         </Link>
       </ListItem>
-
       {isLogin == true ? (
         <React.Fragment>
           <ListItem className={classes.listItem}>
@@ -77,7 +85,7 @@ const HeaderLinks = ({ isLogin, user, logoutAction: _logoutAction, role }) => {
               className={classes.navLink}
               onClick={logout}
             >
-              Çıkış
+              {t("header.logout")}
             </div>
           </ListItem>
           {role == ADMIN && (
@@ -102,6 +110,26 @@ const HeaderLinks = ({ isLogin, user, logoutAction: _logoutAction, role }) => {
           </ListItem>
         </React.Fragment>
       )}
+      <React.Fragment>
+        <ListItem className={classes.listItem}>
+          <a
+            style={{ cursor: "pointer" }}
+            onClick={() => changeLanguage(LANG_TR)}
+            className={classes.navLink}
+          >
+            tr
+          </a>
+        </ListItem>
+        <ListItem className={classes.listItem}>
+          <a
+            style={{ cursor: "pointer" }}
+            onClick={() => changeLanguage(LANG_EN)}
+            className={classes.navLink}
+          >
+            en
+          </a>
+        </ListItem>
+      </React.Fragment>
     </List>
   );
 };

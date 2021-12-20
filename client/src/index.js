@@ -19,6 +19,7 @@ import store from "utils/store";
 // axios config
 import "./utils/axiosConfig";
 import App from "App";
+import i18n from "i18n";
 
 ReactDOM.render(
   <Provider store={store}>

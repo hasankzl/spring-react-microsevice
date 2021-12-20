@@ -17,5 +17,4 @@ const GeneralHeader = () => {
     </div>
   );
 };
-
 export default GeneralHeader;

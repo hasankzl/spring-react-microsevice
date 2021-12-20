@@ -63,8 +63,7 @@ public class AuthResource {
         final UserDetails userDetails = userService.loadUserByUsername(jwtRequest.getEmail());
 
         final String token = jwtUtility.generateToken(userDetails);
-
-        return  new JwtResponse(token,userDetails.getUsername());
+        return  new JwtResponse(token,userDetails.getUsername(),userDetails.getAuthorities().toString());
 
     }
 }

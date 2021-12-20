@@ -21,8 +21,9 @@ import Button from "components/CustomButtons/Button.js";
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
 import { connect } from "react-redux";
 import { logoutAction } from "views/LoginPage/action";
+import { ADMIN } from "utils/constants";
 const useStyles = makeStyles(styles);
-const HeaderLinks = ({ isLogin, user, logoutAction: _logoutAction }) => {
+const HeaderLinks = ({ isLogin, user, logoutAction: _logoutAction, role }) => {
   const classes = useStyles();
   let navigate = useNavigate();
   const logout = () => {
@@ -79,6 +80,13 @@ const HeaderLinks = ({ isLogin, user, logoutAction: _logoutAction }) => {
               Çıkış
             </div>
           </ListItem>
+          {role == ADMIN && (
+            <ListItem className={classes.listItem}>
+              <Link to="/dashboard" className={classes.navLink}>
+                dashboard
+              </Link>
+            </ListItem>
+          )}
         </React.Fragment>
       ) : (
         <React.Fragment>
@@ -100,6 +108,7 @@ const HeaderLinks = ({ isLogin, user, logoutAction: _logoutAction }) => {
 const mapStateToProps = ({ loginReducer }) => ({
   isLogin: loginReducer.isLogin,
   user: loginReducer.user,
+  role: loginReducer.role,
 });
 
 const mapDispatchToProps = {

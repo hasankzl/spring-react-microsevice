@@ -23,10 +23,11 @@ import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import { loginAction } from "./action";
 import image from "assets/img/bg7.jpg";
 import { useNavigate } from "react-router-dom";
+import { ADMIN } from "utils/constants";
 
 const useStyles = makeStyles(styles);
 
-const LoginPage = ({ loginAction: _loginAction }) => {
+const LoginPage = ({ loginAction: _loginAction, isLogin, role }) => {
   const navigator = useNavigate();
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   setTimeout(function () {
@@ -34,6 +35,9 @@ const LoginPage = ({ loginAction: _loginAction }) => {
   }, 700);
   const classes = useStyles();
 
+  if (isLogin) {
+    navigator("/");
+  }
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -48,7 +52,11 @@ const LoginPage = ({ loginAction: _loginAction }) => {
     e.preventDefault();
     await _loginAction(formData).then((d) => {
       if (d == 1) {
-        navigator("/");
+        if (role == ADMIN) {
+          navigator("/dashboard");
+        } else {
+          navigator("/");
+        }
       }
     });
   };
@@ -157,7 +165,10 @@ const LoginPage = ({ loginAction: _loginAction }) => {
   );
 };
 
-const mapStateToProps = ({}) => ({});
+const mapStateToProps = ({ loginReducer }) => ({
+  isLogin: loginReducer.isLogin,
+  role: loginReducer.role,
+});
 const mapDispatchToProps = {
   loginAction,
 };

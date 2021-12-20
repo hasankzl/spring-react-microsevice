@@ -9,10 +9,13 @@ export const loginAction = (data) => async (dispatch) => {
     if (res.status === 200) {
       localStorage.setItem("token", res.data.jwttoken);
       localStorage.setItem("email", res.data.email);
+      // you need to update here if you want to add new roles
+      localStorage.setItem("role", res.data.role);
       dispatch({
         type: LOGIN_ACTION,
         payload: {
           email: res.data.email,
+          role: res.data.role,
         },
       });
       notification.success({
@@ -39,6 +42,7 @@ export const loginAction = (data) => async (dispatch) => {
 export const logoutAction = () => async (dispatch) => {
   localStorage.removeItem("token");
   localStorage.removeItem("email");
+  localStorage.removeItem("role");
   dispatch({
     type: LOGOUT_ACTION,
   });

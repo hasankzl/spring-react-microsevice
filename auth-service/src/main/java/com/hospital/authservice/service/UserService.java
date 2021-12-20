@@ -4,6 +4,8 @@ package com.hospital.authservice.service;
 import com.hospital.authservice.model.Person;
 import com.hospital.authservice.service.PersonService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -23,11 +26,13 @@ public class UserService  implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-
         Person person = personService.findByEmail(email);
 
+        List<GrantedAuthority> list = new ArrayList<>();
+        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(person.getRole());
+        list.add(grantedAuthority);
         if(person != null){
-            return new User(email,person.getPassword(),new ArrayList<>());
+            return new User(email,person.getPassword(),list);
         }
         else{
             throw new UsernameNotFoundException("not found");

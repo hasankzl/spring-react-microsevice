@@ -20,19 +20,21 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
 import image from "assets/img/bg7.jpg";
-import { alertTitleClasses } from "@mui/material";
 import { registerUser } from "./action";
 import { useNavigate } from "react-router-dom";
-
+import { connect } from "react-redux";
+import notification from "utils/notification";
 const useStyles = makeStyles(styles);
 
-export default function RegisterPage(props) {
+const RegisterPage = ({ isLogin }) => {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   setTimeout(function () {
     setCardAnimation("");
   }, 700);
   let navigate = useNavigate();
-
+  if (isLogin) {
+    navigator("/");
+  }
   const [register, setRegister] = useState({
     email: "",
     name: "",
@@ -50,7 +52,7 @@ export default function RegisterPage(props) {
   const submitForm = async (e) => {
     e.preventDefault();
     if (register.password != register.password2) {
-      alert("şifreler eşit değil");
+      notification.warning({ title: "uyarı", message: "şifreler eşit değil" });
     } else {
       await registerUser(register).then((value) => {
         if (value === 1) {
@@ -60,7 +62,7 @@ export default function RegisterPage(props) {
     }
   };
   const classes = useStyles();
-  const { ...rest } = props;
+
   return (
     <div>
       <div
@@ -221,4 +223,8 @@ export default function RegisterPage(props) {
       </div>
     </div>
   );
-}
+};
+const mapStateToProps = ({ loginReducer }) => ({
+  isLogin: loginReducer.isLogin,
+});
+export default connect(mapStateToProps, {})(RegisterPage);

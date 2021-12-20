@@ -2,6 +2,7 @@ import { LOGIN_ACTION, GET_USER, LOGOUT_ACTION } from "../../utils/actionTypes";
 
 const initialState = {
   isLogin: !!localStorage.token,
+  role: localStorage.role,
   user: {
     email: localStorage.email,
   },
@@ -18,6 +19,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLogin: true,
+        role: action.payload.role,
         user: {
           email: action.payload.email,
         },

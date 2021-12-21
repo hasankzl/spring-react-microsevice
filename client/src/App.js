@@ -32,7 +32,7 @@ const App = ({ isLogin, role }) => {
         <Route path="/register-page" element={<RegisterPage />} />
         <Route path="/" element={<Components />} />
         <Route
-          path="/dashboard"
+          path="/dashboard/*"
           element={(() => {
             return isLogin && role == ADMIN ? (
               <Dashboard />

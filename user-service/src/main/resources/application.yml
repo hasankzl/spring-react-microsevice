@@ -10,7 +10,7 @@ spring:
     password: admin
   jpa:
     hibernate:
-      dll-auto: update
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect

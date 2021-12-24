@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { DepartmentFormModal } from "./DepartmentFormModal";
+import DepartmentFormModal from "./DepartmentFormModal";
 import { Button } from "@material-ui/core";
+import DepartmentTable from "./DepartmentTable";
+import { findAllDepartment } from "./action";
 
-export const Department = (props) => {
+export const Department = ({ findAllDepartment: _findAllDepartment }) => {
   const [modalShow, setModalShow] = useState(false);
-
+  useEffect(() => {
+    _findAllDepartment();
+  }, []);
   return (
     <div>
-      <Button onClick={() => setModalShow(true)}>Yeni Department</Button>
+      <DepartmentTable openModal={() => setModalShow(true)} />
       <DepartmentFormModal modalShow={modalShow} setModalShow={setModalShow} />
     </div>
   );
@@ -21,6 +25,6 @@ Department.propTypes = {
 
 const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { findAllDepartment };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Department);

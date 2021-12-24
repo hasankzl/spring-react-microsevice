@@ -7,3 +7,7 @@ export const ADMIN = "[admin]";
 export const LANG_TR = "tr";
 export const LANG_EN = "en";
 export const CURRENT_LANG = "CURRENT_LANG";
+
+export const DEPARTMENT_SAVE_URL = "/hospital/department/save";
+export const DEPARTMENT_DELETE_URL = "/hospital/department/delete/";
+export const DEPARTMENT_FIND_ALL_URL = "/hospital/department/findAll";

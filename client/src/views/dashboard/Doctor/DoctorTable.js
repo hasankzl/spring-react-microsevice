@@ -4,24 +4,28 @@ import { connect } from "react-redux";
 import { DataGrid } from "@mui/x-data-grid";
 import { Paper } from "@mui/material";
 import MaterialTable from "material-table";
-import { setEditDepartment, deleteDepartment } from "./action";
+import { setEditDoctor, deleteDoctor } from "./action";
 const columns = [
   { title: "ID", field: "id" },
-  { title: "Başlık", field: "name" },
+  { title: "İsim", field: "name" },
+  { title: "Soyad", field: "surname" },
+  { title: "Bölüm", field: "department.name" },
+  { title: "Uzmanlık", field: "specialty" },
+  { title: "email", field: "email" },
 ];
 
-const DepartmentTable = ({
-  departmentList,
-  setEditDepartment: _setEditDepartment,
+const DoctorTable = ({
+  doctorList,
+  setEditDoctor: _setEditDoctor,
   openModal,
-  deleteDepartment: _deleteDepartment,
+  deleteDoctor: _deleteDoctor,
 }) => {
   return (
     <div style={{ maxWidth: "100%", margin: 20 }}>
       <MaterialTable
         columns={columns}
-        data={departmentList}
-        title="Hastane Bölümleri"
+        data={doctorList}
+        title="Doktorlar"
         options={{
           actionsColumnIndex: -1,
         }}
@@ -30,16 +34,16 @@ const DepartmentTable = ({
             icon: "add",
             tooltip: "Yeni Kayıt Ekle",
             isFreeAction: true,
-            onClick: (event, rowData, row, rows) => {
-              _setEditDepartment({});
+            onClick: (event, rowData) => {
+              _setEditDoctor({});
               openModal();
             },
           },
           {
             icon: "edit",
             tooltip: "Kayıt güncelle",
-            onClick: (event, rowData, row, rows) => {
-              _setEditDepartment(rowData);
+            onClick: (event, rowData) => {
+              _setEditDoctor(rowData);
               openModal();
             },
           },
@@ -47,7 +51,7 @@ const DepartmentTable = ({
             icon: "delete",
             tooltip: "Kayıt Sil",
             onClick: (event, rowData) => {
-              _deleteDepartment(rowData.id);
+              _deleteDoctor(rowData.id);
             },
           },
         ]}
@@ -56,14 +60,14 @@ const DepartmentTable = ({
   );
 };
 
-DepartmentTable.propTypes = {
+DoctorTable.propTypes = {
   props: PropTypes,
 };
 
-const mapStateToProps = ({ departmentReducer }) => ({
-  departmentList: departmentReducer.departmentList,
+const mapStateToProps = ({ doctorReducer }) => ({
+  doctorList: doctorReducer.doctorList,
 });
 
-const mapDispatchToProps = { setEditDepartment, deleteDepartment };
+const mapDispatchToProps = { setEditDoctor, deleteDoctor };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DepartmentTable);
+export default connect(mapStateToProps, mapDispatchToProps)(DoctorTable);

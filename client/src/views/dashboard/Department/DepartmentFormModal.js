@@ -53,6 +53,12 @@ const DepartmentFormModal = ({
         )
       );
       setDepartment({ ...editingDepartment });
+    } else {
+      setDepartment({
+        name: "",
+        description: "",
+      });
+      setEditorState(EditorState.createEmpty());
     }
   }, [editingDepartment]);
 
@@ -93,7 +99,7 @@ const DepartmentFormModal = ({
       }}
     >
       <Box sx={style}>
-        <Typography>Başlık giriniz</Typography>
+        <Typography>Bölüm</Typography>
         <form onSubmit={handleSubmit}>
           <CustomInput
             labelText="Adı"

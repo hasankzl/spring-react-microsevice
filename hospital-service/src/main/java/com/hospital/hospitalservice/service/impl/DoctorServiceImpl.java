@@ -1,6 +1,7 @@
 package com.hospital.hospitalservice.service.impl;
 
 import com.hospital.hospitalservice.model.Doctor;
+import com.hospital.hospitalservice.projection.DoctorProjection;
 import com.hospital.hospitalservice.repository.DoctorRepository;
 import com.hospital.hospitalservice.service.DoctorService;
 import lombok.RequiredArgsConstructor;
@@ -15,8 +16,8 @@ public class DoctorServiceImpl  implements DoctorService {
     private final DoctorRepository doctorRepository;
 
     @Override
-    public Doctor save(Doctor doctor) {
-        return doctorRepository.save(doctor);
+    public void save(Doctor doctor) {
+        doctorRepository.save(doctor);
     }
 
     @Override
@@ -25,7 +26,7 @@ public class DoctorServiceImpl  implements DoctorService {
     }
 
     @Override
-    public List<Doctor> findAll() {
-        return doctorRepository.findAll();
+    public List<DoctorProjection> findAll() {
+        return doctorRepository.findAllProjectedBy();
     }
 }

@@ -2,34 +2,39 @@ package com.hospital.hospitalservice.resource;
 
 
 import com.hospital.hospitalservice.model.Doctor;
+import com.hospital.hospitalservice.projection.DoctorProjection;
 import com.hospital.hospitalservice.service.DoctorService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/doctor")
 @RequiredArgsConstructor
+@Slf4j
 public class DoctorResource {
 
     private final DoctorService doctorService;
 
 
     @PostMapping("/save")
-    public Doctor save(@RequestBody Doctor doctor){
-
-        return doctorService.save(doctor);
+    public void save(@RequestBody Doctor doctor){
+    log.info("doctor save {}",doctor);
+     doctorService.save(doctor);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void delete(@RequestParam Long id){
+    public void delete(@PathVariable Long id){
 
         doctorService.delete(id);
     }
 
     @GetMapping("/findAll")
-    public void findAll(){
+    public List<DoctorProjection> findAll(){
 
-        doctorService.findAll();
+       return doctorService.findAll();
     }
 
 }

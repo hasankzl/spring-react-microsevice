@@ -1,6 +1,6 @@
 import axios from "axios";
 import { API_BASE_URL } from "./constants";
-import Notification from "./notification";
+import notification from "./notification";
 
 axios.defaults.baseURL = API_BASE_URL;
 
@@ -17,7 +17,7 @@ axios.interceptors.request.use((config) => {
 axios.interceptors.response.use(
   (response) => {
     if (response.status === 200 && response.data.message) {
-      Notification.success({
+      notification.success({
         message: response.data.message,
         title: "başarılı",
       });
@@ -28,16 +28,24 @@ axios.interceptors.response.use(
     if (error.response) {
       switch (error.response.status) {
         case 401:
-          Notification.warning({
+          notification.warning({
             title: "hata",
             message: "Kullanıcı adı şifre hatalı",
           });
           //  window.location = "/"
           break;
         case 400:
-          Notification.warning({
+          notification.warning({
             title: "hata",
             message: error.response.data.message,
+          });
+
+          break;
+
+        case 503:
+          notification.warning({
+            title: "hata",
+            message: "servis aktif değil",
           });
 
           break;

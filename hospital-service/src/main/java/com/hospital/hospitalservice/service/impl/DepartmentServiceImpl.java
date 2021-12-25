@@ -1,6 +1,7 @@
 package com.hospital.hospitalservice.service.impl;
 
 import com.hospital.hospitalservice.model.Department;
+import com.hospital.hospitalservice.projection.DepartmentProjection;
 import com.hospital.hospitalservice.repository.DepartmentRepository;
 import com.hospital.hospitalservice.service.DepartmentService;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public List<Department> findAll() {
-        return departmentRepository.findAll();
+    public List<DepartmentProjection> findAll() {
+        return departmentRepository.findAllProjectedBy();
     }
 }

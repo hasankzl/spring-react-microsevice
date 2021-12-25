@@ -1,6 +1,10 @@
 import axios from "axios";
 import { FIND_DEPARTMENT, EDIT_DEPARTMENT } from "utils/actionTypes";
-import { DEPARTMENT_SAVE_URL, DEPARTMENT_FIND_ALL_URL } from "utils/constants";
+import {
+  DEPARTMENT_SAVE_URL,
+  DEPARTMENT_FIND_ALL_URL,
+  DEPARTMENT_DELETE_URL,
+} from "utils/constants";
 import notification from "utils/notification";
 
 export const setEditDepartment = (department) => async (dispatch) => {
@@ -12,16 +16,17 @@ export const setEditDepartment = (department) => async (dispatch) => {
   });
 };
 
-export const saveEditDepartment = (department) => async (dispatch) => {
-  axios.post(DEPARTMENT_SAVE_URL, department).then((res) => {
+export const deleteDepartment = (id) => async (dispatch) => {
+  await axios.delete(DEPARTMENT_DELETE_URL + id).then((res) => {
     if (res.status == 200) {
       notification.success({
-        title: "Başarılı",
-        message: "Kayıt başarıyla güncellendi",
+        message: "Kayıt silme başarılı",
       });
+      dispatch(findAllDepartment());
     }
   });
 };
+
 export const saveDepartment = (department) => async (dispatch) => {
   const status = await axios
     .post(DEPARTMENT_SAVE_URL, department)

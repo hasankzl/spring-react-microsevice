@@ -2,6 +2,7 @@ package com.hospital.hospitalservice.resource;
 
 
 import com.hospital.hospitalservice.model.Department;
+import com.hospital.hospitalservice.projection.DepartmentProjection;
 import com.hospital.hospitalservice.service.DepartmentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,12 +25,13 @@ public class DepartmentResource {
     }
 
     @DeleteMapping("/delete/{id}")
-    private void delete(@RequestParam Long id){
-         departmentService.delete(id);
+    private void delete(@PathVariable Long id){
+
+        departmentService.delete(id);
     }
 
     @GetMapping("/findAll")
-    private List<Department> findAll(){
+    private List<DepartmentProjection> findAll(){
 
         return departmentService.findAll();
     }

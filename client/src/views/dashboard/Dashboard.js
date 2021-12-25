@@ -21,7 +21,7 @@ import Chart from "./Chart";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import { Doctor } from "./Doctor/Doctor";
+import Doctor from "./Doctor/Doctor";
 import Department from "./Department/Department";
 function Copyright(props) {
   return (

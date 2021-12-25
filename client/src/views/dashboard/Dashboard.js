@@ -126,7 +126,7 @@ function DashboardContent() {
               component={Link}
               to="/dashboard"
             >
-              Admin Panel
+              Admin Paneli
             </Typography>
 
             <IconButton color="inherit">

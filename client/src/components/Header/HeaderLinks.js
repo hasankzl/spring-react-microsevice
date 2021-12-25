@@ -100,12 +100,12 @@ const HeaderLinks = ({ isLogin, user, logoutAction: _logoutAction, role }) => {
         <React.Fragment>
           <ListItem className={classes.listItem}>
             <Link to="/register-page" className={classes.navLink}>
-              Kayıt
+              {t("header.register")}
             </Link>
           </ListItem>
           <ListItem className={classes.listItem}>
             <Link to="/login-page" className={classes.navLink}>
-              Giriş
+              {t("header.login")}
             </Link>
           </ListItem>
         </React.Fragment>

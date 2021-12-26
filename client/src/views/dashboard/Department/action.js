@@ -6,7 +6,7 @@ import {
   DEPARTMENT_DELETE_URL,
 } from "utils/constants";
 import notification from "utils/notification";
-
+import { t } from "i18next";
 export const setEditDepartment = (department) => async (dispatch) => {
   dispatch({
     type: EDIT_DEPARTMENT,
@@ -20,7 +20,7 @@ export const deleteDepartment = (id) => async (dispatch) => {
   await axios.delete(DEPARTMENT_DELETE_URL + id).then((res) => {
     if (res.status == 200) {
       notification.success({
-        message: "Kayıt silme başarılı",
+        message: t("general.deleteSuccess"),
       });
       dispatch(findAllDepartment());
     }
@@ -33,11 +33,10 @@ export const saveDepartment = (department) => async (dispatch) => {
     .then((res) => {
       if (res.status == 200) {
         notification.success({
-          title: "başarılı",
-          message: "İşlem  başarılı",
+          message: t("general.saveSuccess"),
         });
       } else {
-        notification.warning({ title: "hata", message: "bir hata oluştu" });
+        notification.warning({ message: t("general.saveFailed") });
       }
 
       return res.status;

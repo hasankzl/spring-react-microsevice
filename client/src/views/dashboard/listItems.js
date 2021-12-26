@@ -12,24 +12,6 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import { Link } from "react-router-dom";
 export const mainListItems = (
   <div>
-    <ListItem button component={Link} to="/">
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Anasayfa" />
-    </ListItem>
-    <ListItem button component={Link} to="./department">
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Departments" />
-    </ListItem>
-    <ListItem button component={Link} to="./doctor">
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Doctors" />
-    </ListItem>
     <ListItem button>
       <ListItemIcon>
         <BarChartIcon />

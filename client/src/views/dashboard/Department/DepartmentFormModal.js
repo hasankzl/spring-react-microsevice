@@ -18,6 +18,8 @@ import {
 import draftToHtml from "draftjs-to-html";
 import { saveDepartment, findAllDepartment } from "./action";
 
+import { useTranslation } from "react-i18next";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -35,6 +37,8 @@ const DepartmentFormModal = ({
   saveDepartment: _saveDepartment,
   findAllDepartment: _findAllDepartment,
 }) => {
+  const { t } = useTranslation();
+
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   const [department, setDepartment] = useState({
@@ -99,10 +103,10 @@ const DepartmentFormModal = ({
       }}
     >
       <Box sx={style}>
-        <Typography>Bölüm</Typography>
+        <Typography>{t("dashboard.department.modal.department")}</Typography>
         <form onSubmit={handleSubmit}>
           <CustomInput
-            labelText="Adı"
+            labelText={t("dashboard.department.modal.name")}
             formControlProps={{
               fullWidth: true,
             }}
@@ -113,7 +117,9 @@ const DepartmentFormModal = ({
               onChange: handleInput,
             }}
           />
-          <Typography>Açıklama Giriniz</Typography>
+          <Typography>
+            {t("dashboard.department.modal.enterDescription")}
+          </Typography>
           <Editor
             editorState={editorState}
             onEditorStateChange={onEditorChange}
@@ -125,7 +131,7 @@ const DepartmentFormModal = ({
             size="lg"
             type="submit"
           >
-            Kaydet
+            {t("general.save")}
           </Button>
         </form>
       </Box>

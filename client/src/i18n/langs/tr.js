@@ -28,6 +28,7 @@ const translate = {
       addNewRecord: "yeni kayıt ekle",
       deleteRecord: "kayıt sil",
       updateRecord: "kayıt güncelle",
+      serviceNotActive: "Ulaşmaya çalıştığınız servis aktif değil !",
     },
     header: {
       login: "giriş",
@@ -47,6 +48,10 @@ const translate = {
       login: "giriş",
     },
     dashboard: {
+      homepage: "anasayfa",
+      dashboard: "Kontrol Paneli",
+      departments: "Bölümler",
+      doctors: "Doktorlar",
       doctor: {
         modal: {
           enterName: "bir isim giriniz",
@@ -71,6 +76,7 @@ const translate = {
         },
         table: {
           name: "başlık",
+          title: "Hastane Bölümleri",
         },
       },
     },

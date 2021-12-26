@@ -5,10 +5,8 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Paper } from "@mui/material";
 import MaterialTable from "material-table";
 import { setEditDepartment, deleteDepartment } from "./action";
-const columns = [
-  { title: "ID", field: "id" },
-  { title: "Başlık", field: "name" },
-];
+
+import { useTranslation } from "react-i18next";
 
 const DepartmentTable = ({
   departmentList,
@@ -16,19 +14,26 @@ const DepartmentTable = ({
   openModal,
   deleteDepartment: _deleteDepartment,
 }) => {
+  const { t } = useTranslation();
+
+  const columns = [
+    { title: "ID", field: "id" },
+    { title: t("dashboard.department.table.name"), field: "name" },
+  ];
+
   return (
     <div style={{ maxWidth: "100%", margin: 20 }}>
       <MaterialTable
         columns={columns}
         data={departmentList}
-        title="Hastane Bölümleri"
+        title={t("dashboard.department.table.title")}
         options={{
           actionsColumnIndex: -1,
         }}
         actions={[
           {
             icon: "add",
-            tooltip: "Yeni Kayıt Ekle",
+            tooltip: t("general.addNewRecord"),
             isFreeAction: true,
             onClick: (event, rowData, row, rows) => {
               _setEditDepartment({});
@@ -37,7 +42,7 @@ const DepartmentTable = ({
           },
           {
             icon: "edit",
-            tooltip: "Kayıt güncelle",
+            tooltip: t("general.updateRecord"),
             onClick: (event, rowData, row, rows) => {
               _setEditDepartment(rowData);
               openModal();
@@ -45,7 +50,7 @@ const DepartmentTable = ({
           },
           {
             icon: "delete",
-            tooltip: "Kayıt Sil",
+            tooltip: t("general.deleteRecord"),
             onClick: (event, rowData) => {
               _deleteDepartment(rowData.id);
             },

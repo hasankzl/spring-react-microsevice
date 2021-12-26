@@ -23,6 +23,21 @@ import Orders from "./Orders";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Doctor from "./Doctor/Doctor";
 import Department from "./Department/Department";
+import { LANG_TR, LANG_EN } from "utils/constants";
+import i18n from "i18n";
+import { Button } from "@mui/material";
+import { useTranslation } from "react-i18next";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import ListSubheader from "@mui/material/ListSubheader";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import PeopleIcon from "@mui/icons-material/People";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import LayersIcon from "@mui/icons-material/Layers";
+import AssignmentIcon from "@mui/icons-material/Assignment";
+
 function Copyright(props) {
   return (
     <Typography
@@ -94,7 +109,10 @@ function DashboardContent() {
   const toggleDrawer = () => {
     setOpen(!open);
   };
-
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
+  const { t } = useTranslation();
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: "flex" }}>
@@ -126,13 +144,29 @@ function DashboardContent() {
               component={Link}
               to="/dashboard"
             >
-              Admin Paneli
+              {t("dashboard.dashboard")}
             </Typography>
 
             <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
+              <Button
+                component="h4"
+                color="inherit"
+                noWrap
+                onClick={() => changeLanguage(LANG_TR)}
+                sx={{ flexGrow: 1 }}
+              >
+                TR
+              </Button>
+
+              <Button
+                component="h4"
+                color="inherit"
+                noWrap
+                onClick={() => changeLanguage(LANG_EN)}
+                sx={{ flexGrow: 1 }}
+              >
+                EN
+              </Button>
             </IconButton>
           </Toolbar>
         </AppBar>
@@ -150,7 +184,27 @@ function DashboardContent() {
             </IconButton>
           </Toolbar>
           <Divider />
-          <List>{mainListItems}</List>
+          <List>
+            <ListItem button component={Link} to="/">
+              <ListItemIcon>
+                <DashboardIcon />
+              </ListItemIcon>
+              <ListItemText primary={t("dashboard.homepage")} />
+            </ListItem>
+            <ListItem button component={Link} to="./department">
+              <ListItemIcon>
+                <PeopleIcon />
+              </ListItemIcon>
+              <ListItemText primary={t("dashboard.departments")} />
+            </ListItem>
+            <ListItem button component={Link} to="./doctor">
+              <ListItemIcon>
+                <PeopleIcon />
+              </ListItemIcon>
+              <ListItemText primary={t("dashboard.doctors")} />
+            </ListItem>
+            {mainListItems}
+          </List>
           <Divider />
           <List>{secondaryListItems}</List>
         </Drawer>

@@ -11,6 +11,7 @@ import CustomInput from "components/CustomInput/CustomInput";
 import { saveDoctor } from "./action";
 import { FormControl } from "@mui/material";
 import { InputLabel, MenuItem, Select } from "@material-ui/core";
+import { useTranslation } from "react-i18next";
 
 const style = {
   position: "absolute",
@@ -40,6 +41,8 @@ const DoctorFormModal = ({
   departmentList,
 }) => {
   const [doctor, setDoctor] = useState({ ...emptyDoctor });
+
+  const { t } = useTranslation();
 
   // if this is a edit then set the editting value to form
   useEffect(() => {
@@ -87,9 +90,9 @@ const DoctorFormModal = ({
     >
       <Box sx={style}>
         <form onSubmit={handleSubmit}>
-          <Typography>Bir isim giriniz</Typography>
+          <Typography>{t("dashboard.doctor.modal.enterName")}</Typography>
           <CustomInput
-            labelText="Adı"
+            labelText={t("dashboard.doctor.table.name")}
             formControlProps={{
               fullWidth: true,
             }}
@@ -100,9 +103,9 @@ const DoctorFormModal = ({
               onChange: handleInput,
             }}
           />
-          <Typography>Soyad Giriniz</Typography>
+          <Typography>{t("dashboard.doctor.modal.enterSurname")}</Typography>
           <CustomInput
-            labelText="soyadı"
+            labelText={t("dashboard.doctor.table.surname")}
             formControlProps={{
               fullWidth: true,
             }}
@@ -113,13 +116,15 @@ const DoctorFormModal = ({
               onChange: handleInput,
             }}
           />
-          <Typography>Bölüm Seçiniz</Typography>
+          <Typography>
+            {t("dashboard.doctor.modal.selectDepartment")}
+          </Typography>
           <FormControl fullWidth style={{ margin: "10px 0px 10px 0px" }}>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={doctor.department.id}
-              label="bölüm"
+              label={t("dashboard.doctor.table.department")}
               name="department"
               onChange={handleInput}
             >
@@ -128,9 +133,9 @@ const DoctorFormModal = ({
               ))}
             </Select>
           </FormControl>
-          <Typography>Uzmanlık Alanı Giriniz</Typography>
+          <Typography>{t("dashboard.doctor.modal.enterSpecialty")}</Typography>
           <CustomInput
-            labelText="uzmanlık"
+            labelText={t("dashboard.doctor.table.specialty")}
             formControlProps={{
               fullWidth: true,
             }}
@@ -142,14 +147,14 @@ const DoctorFormModal = ({
             }}
           />
 
-          <Typography>Email Adresi Giriniz</Typography>
+          <Typography>{t("dashboard.doctor.modal.enterEmail")}</Typography>
           <CustomInput
-            labelText="email adresi"
+            labelText={t("dashboard.doctor.table.email")}
             formControlProps={{
               fullWidth: true,
             }}
             inputProps={{
-              type: "text",
+              type: "email",
               name: "email",
               value: doctor.email,
               onChange: handleInput,
@@ -162,7 +167,7 @@ const DoctorFormModal = ({
             size="lg"
             type="submit"
           >
-            Kaydet
+            {t("general.save")}
           </Button>
         </form>
       </Box>

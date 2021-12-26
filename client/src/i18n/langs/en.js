@@ -28,6 +28,7 @@ const translate = {
       addNewRecord: "add a new record",
       deleteRecord: "delete record",
       updateRecord: "update record",
+      serviceNotActive: "this service is not active!",
     },
     header: {
       login: "login",
@@ -47,6 +48,10 @@ const translate = {
       login: "login",
     },
     dashboard: {
+      homepage: "homepage",
+      dashboard: "dashboard",
+      departments: "departments",
+      doctors: "doctors",
       doctor: {
         modal: {
           enterName: "enter a name",
@@ -71,6 +76,7 @@ const translate = {
         },
         table: {
           name: "title",
+          title: "Hospital Departments",
         },
       },
     },

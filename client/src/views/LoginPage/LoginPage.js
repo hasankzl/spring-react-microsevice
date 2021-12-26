@@ -24,10 +24,11 @@ import { loginAction } from "./action";
 import image from "assets/img/bg7.jpg";
 import { useNavigate } from "react-router-dom";
 import { ADMIN } from "utils/constants";
-
+import { useTranslation } from "react-i18next";
 const useStyles = makeStyles(styles);
 
 const LoginPage = ({ loginAction: _loginAction, isLogin, role }) => {
+  const { t } = useTranslation();
   const navigator = useNavigate();
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   setTimeout(function () {
@@ -76,7 +77,7 @@ const LoginPage = ({ loginAction: _loginAction, isLogin, role }) => {
               <Card className={classes[cardAnimaton]}>
                 <form className={classes.form} onSubmit={handleSubmit}>
                   <CardHeader color="primary" className={classes.cardHeader}>
-                    <h4>Giriş</h4>
+                    <h4>{t("login.login")}</h4>
                     <div className={classes.socialLine}>
                       <Button
                         justIcon
@@ -110,7 +111,7 @@ const LoginPage = ({ loginAction: _loginAction, isLogin, role }) => {
                   <p className={classes.divider}></p>
                   <CardBody>
                     <CustomInput
-                      labelText="Email "
+                      labelText={t("login.email")}
                       id="email"
                       formControlProps={{
                         fullWidth: true,
@@ -128,7 +129,7 @@ const LoginPage = ({ loginAction: _loginAction, isLogin, role }) => {
                       }}
                     />
                     <CustomInput
-                      labelText="Şifre"
+                      labelText={t("login.password")}
                       id="pass"
                       formControlProps={{
                         fullWidth: true,
@@ -151,7 +152,7 @@ const LoginPage = ({ loginAction: _loginAction, isLogin, role }) => {
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
                     <Button simple color="primary" size="lg" type="submit">
-                      Giriş
+                      {t("login.login")}
                     </Button>
                   </CardFooter>
                 </form>

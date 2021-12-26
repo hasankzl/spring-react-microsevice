@@ -18,15 +18,30 @@ import { NotificationContainer } from "react-notifications";
 import { ACCESS_TOKEN } from "utils/constants.js";
 import { ROLE } from "utils/constants.js";
 import { ADMIN } from "utils/constants.js";
+import DoctorPage from "views/DoctorPage/DoctorPage.js";
+import { generalFindAllDepartment } from "utils/action.js";
+import { useEffect } from "react";
+import DepartmentPage from "views/DepartmentPage/DepartmentPage.js";
 
 var hist = createBrowserHistory();
 
-const App = ({ isLogin, role }) => {
+const App = ({
+  isLogin,
+  role,
+  generalFindAllDepartment: _generalFindAllDepartment,
+}) => {
+  useEffect(() => {
+    _generalFindAllDepartment();
+  }, []);
   return (
     <Router history={hist}>
       <GeneralHeader />
       <Routes>
-        <Route path="/landing-page" element={<LandingPage />} />
+        <Route path="/doctor-page" element={<DoctorPage />} />
+        <Route
+          path="/department-page/:departmentId"
+          element={<DepartmentPage />}
+        />
         <Route path="/profile-page" element={<ProfilePage />} />
         <Route path="/login-page" element={<LoginPage />} />
         <Route path="/register-page" element={<RegisterPage />} />
@@ -50,4 +65,4 @@ const mapStateToProps = ({ loginReducer }) => ({
   isLogin: loginReducer.isLogin,
   role: loginReducer.role,
 });
-export default connect(mapStateToProps, {})(App);
+export default connect(mapStateToProps, { generalFindAllDepartment })(App);

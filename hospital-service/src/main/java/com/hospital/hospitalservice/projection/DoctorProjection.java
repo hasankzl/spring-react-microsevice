@@ -13,5 +13,5 @@ public interface DoctorProjection {
 
     String getEmail();
 
-    DepartmentProjection getDepartment();
+    SimpleDepartmentProjection getDepartment();
 }

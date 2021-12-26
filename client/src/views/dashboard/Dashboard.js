@@ -147,7 +147,7 @@ function DashboardContent() {
               {t("dashboard.dashboard")}
             </Typography>
 
-            <IconButton color="inherit">
+            <div>
               <Button
                 component="h4"
                 color="inherit"
@@ -167,7 +167,7 @@ function DashboardContent() {
               >
                 EN
               </Button>
-            </IconButton>
+            </div>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>

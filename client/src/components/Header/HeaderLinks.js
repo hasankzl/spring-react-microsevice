@@ -26,7 +26,13 @@ import { useTranslation } from "react-i18next";
 import i18n from "i18n";
 import { LANG_TR, LANG_EN } from "utils/constants";
 const useStyles = makeStyles(styles);
-const HeaderLinks = ({ isLogin, user, logoutAction: _logoutAction, role }) => {
+const HeaderLinks = ({
+  isLogin,
+  user,
+  logoutAction: _logoutAction,
+  role,
+  departmentList,
+}) => {
   const { t } = useTranslation();
   const classes = useStyles();
   let navigate = useNavigate();
@@ -47,7 +53,7 @@ const HeaderLinks = ({ isLogin, user, logoutAction: _logoutAction, role }) => {
         </Link>
       </ListItem>
       <ListItem className={classes.listItem}>
-        <Link to="/" className={classes.navLink}>
+        <Link to="/doctor-page" className={classes.navLink}>
           {t("header.doctors")}
         </Link>
       </ListItem>
@@ -60,11 +66,14 @@ const HeaderLinks = ({ isLogin, user, logoutAction: _logoutAction, role }) => {
             color: "transparent",
           }}
           buttonIcon={Apps}
-          dropdownList={[
-            <Link to="/" className={classes.dropdownLink}>
-              Genel Cerrahi
-            </Link>,
-          ]}
+          dropdownList={departmentList.map((department) => (
+            <Link
+              to={"/department-page/" + department.id}
+              className={classes.dropdownLink}
+            >
+              {department.name}
+            </Link>
+          ))}
         />
       </ListItem>
       <ListItem className={classes.listItem}>
@@ -133,10 +142,11 @@ const HeaderLinks = ({ isLogin, user, logoutAction: _logoutAction, role }) => {
     </List>
   );
 };
-const mapStateToProps = ({ loginReducer }) => ({
+const mapStateToProps = ({ loginReducer, generalReducer }) => ({
   isLogin: loginReducer.isLogin,
   user: loginReducer.user,
   role: loginReducer.role,
+  departmentList: generalReducer.departmentList,
 });
 
 const mapDispatchToProps = {

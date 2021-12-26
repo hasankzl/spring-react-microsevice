@@ -2,6 +2,7 @@ package com.hospital.hospitalservice.resource;
 
 
 import com.hospital.hospitalservice.model.Department;
+import com.hospital.hospitalservice.projection.DepartmentPageProjection;
 import com.hospital.hospitalservice.projection.DepartmentProjection;
 import com.hospital.hospitalservice.service.DepartmentService;
 import lombok.RequiredArgsConstructor;
@@ -32,9 +33,12 @@ public class DepartmentResource {
 
     @GetMapping("/findAll")
     private List<DepartmentProjection> findAll(){
-
         return departmentService.findAll();
     }
+    @GetMapping("/findById/{id}")
+    private DepartmentPageProjection findByUrl (@PathVariable Long id){
 
+        return departmentService.findById(id);
+    }
 
 }

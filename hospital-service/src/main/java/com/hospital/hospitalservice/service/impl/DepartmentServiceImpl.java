@@ -1,6 +1,7 @@
 package com.hospital.hospitalservice.service.impl;
 
 import com.hospital.hospitalservice.model.Department;
+import com.hospital.hospitalservice.projection.DepartmentPageProjection;
 import com.hospital.hospitalservice.projection.DepartmentProjection;
 import com.hospital.hospitalservice.repository.DepartmentRepository;
 import com.hospital.hospitalservice.service.DepartmentService;
@@ -28,5 +29,10 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public List<DepartmentProjection> findAll() {
         return departmentRepository.findAllProjectedBy();
+    }
+
+    @Override
+    public DepartmentPageProjection findById(Long id) {
+        return departmentRepository.findAllProjectedById(id);
     }
 }

@@ -15,3 +15,5 @@ export const DEPARTMENT_FIND_ALL_URL = "/hospital/department/findAll";
 export const DOCTOR_SAVE_URL = "/hospital/doctor/save";
 export const DOCTOR_DELETE_URL = "/hospital/doctor/delete/";
 export const DOCTOR_FIND_ALL_URL = "/hospital/doctor/findAll";
+
+export const FIND_DEPARTMENT_BY_URL = "/hospital/department/findById/";

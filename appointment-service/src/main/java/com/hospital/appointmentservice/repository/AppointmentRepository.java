@@ -9,7 +9,6 @@ import java.util.List;
 public interface AppointmentRepository  extends JpaRepository<Appointment,Long> {
 
 
-    Appointment findByAppointmentEndDateBetween(Date startDate, Date endDate);
 
     List<Appointment> findByDoctorId(Long id);
 

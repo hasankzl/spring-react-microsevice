@@ -20,25 +20,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public void save(Appointment appointment) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(appointment.getAppointmentStartDate());
-        calendar.add(Calendar.MINUTE, 15);
-        Date dateAfter15min = calendar.getTime();
 
-        Calendar calendarStart = Calendar.getInstance();
-        calendarStart.setTime(appointment.getAppointmentStartDate());
-        calendarStart.add(Calendar.SECOND, 5);
-        // added 5 sec to start date
-        Date startDate = calendarStart.getTime();
-
-        // check the date between 15 min
-        Appointment sameAppointmentDate = appointmentRepository.findByAppointmentEndDateBetween(startDate,dateAfter15min);
-
-        if(sameAppointmentDate !=null) {
-            return;
-        }
-
-        appointment.setAppointmentEndDate(calendar.getTime());
         appointmentRepository.save(appointment);
     }
 

@@ -7,45 +7,25 @@ import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 
 // core components
-import Header from "components/Header/Header.js";
-import Footer from "components/Footer/Footer.js";
-import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
-import HeaderLinks from "components/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
 
 import styles from "assets/jss/material-kit-react/views/landingPage.js";
 
 // Sections for this page
 import ProductSection from "./Sections/ProductSection.js";
-import TeamSection from "../Components/TeamSection.js";
 import { connect } from "react-redux";
-import { findAllDoctor } from "./action.js";
+import { clearReducer } from "./action.js";
 import Carousel from "react-material-ui-carousel";
 import { Paper } from "@mui/material";
 import DepartmentSelect from "./Carousel/DepartmentSelect.js";
 import DoctorSelect from "./Carousel/DoctorSelect.js";
-
-var items = [
-  {
-    name: "Random Name #1",
-    description: "Probably the most random thing you have ever seen!",
-  },
-  {
-    name: "Random Name #2",
-    description: "Hello World!",
-  },
-];
-const dashboardRoutes = [];
-
+import AppointmentSelect from "./Carousel/AppointmentSelect.js";
 const useStyles = makeStyles(styles);
 
-const AppointmentPage = ({ departmentList, carouselPage }) => {
-  const [doctorList, setDoctorList] = useState([]);
-  useEffect(async () => {
-    const list = await findAllDoctor();
-    setDoctorList(list);
+const AppointmentPage = ({ carouselPage, clearReducer: _clearReducer }) => {
+  useEffect(() => {
+    _clearReducer();
   }, []);
   const classes = useStyles();
   return (
@@ -71,6 +51,9 @@ const AppointmentPage = ({ departmentList, carouselPage }) => {
                 <Paper>
                   <DoctorSelect />
                 </Paper>
+                <Paper>
+                  <AppointmentSelect />
+                </Paper>
               </Carousel>
             </div>
           </div>
@@ -84,5 +67,5 @@ const mapStateToProps = ({ generalReducer, appointmentReducer }) => ({
   departmentList: generalReducer.departmetList,
   carouselPage: appointmentReducer.carouselPage,
 });
-const mapDispatchToProps = {};
+const mapDispatchToProps = { clearReducer };
 export default connect(mapStateToProps, mapDispatchToProps)(AppointmentPage);

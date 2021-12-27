@@ -5,30 +5,32 @@ import { FormControl, InputLabel, NativeSelect } from "@mui/material";
 import GridContainer from "components/Grid/GridContainer";
 import { makeStyles } from "@material-ui/core/styles";
 import styles from "assets/jss/material-kit-react/views/landingPageSections/productStyle.js";
-import { setSelectedDoctor, findDoctorByDepartment } from "../action";
+import { findAppointmentByDoctor } from "../action";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
-import FavoriteIcon from "@material-ui/icons/Favorite";
 import EventNoteIcon from "@mui/icons-material/EventNote";
 const useStyles = makeStyles(styles);
-const DoctorSelect = ({
-  setSelectedDoctor: _setSelectedDoctor,
-  selectedDepartment,
-  doctorList,
-  findDoctorByDepartment: _findDoctorByDepartment,
+
+const AppointmentSelect = ({
+  selectedDoctor,
+  appointmentList,
+  findAppointmentByDoctor: _findAppointmentByDoctor,
 }) => {
   useEffect(() => {
-    if (selectedDepartment.id != null) {
-      _findDoctorByDepartment(selectedDepartment.id);
+    if (selectedDoctor.id != null) {
+      _findAppointmentByDoctor(selectedDoctor.id);
     }
-  }, [selectedDepartment]);
+  }, [selectedDoctor]);
+
   const classes = useStyles();
+
   return (
     <div className={classes.section}>
       <GridContainer justify="center">
-        {doctorList.map((doctor) => (
+        {selectedDoctor.name}
+        {appointmentList.map((appointment) => (
           <GridItem md={3}>
             <Card className={classes.root}>
               <CardHeader
@@ -38,15 +40,12 @@ const DoctorSelect = ({
                   </Avatar>
                 }
                 action={
-                  <IconButton
-                    aria-label="settings"
-                    onClick={() => _setSelectedDoctor(doctor)}
-                  >
+                  <IconButton aria-label="settings">
                     <EventNoteIcon />
                   </IconButton>
                 }
-                title={`${doctor.name} ${doctor.surname}`}
-                subheader={doctor.specialty}
+                title={`${appointment.name} ${appointment.surname}`}
+                subheader={appointment.specialty}
               />
             </Card>
           </GridItem>
@@ -56,12 +55,11 @@ const DoctorSelect = ({
   );
 };
 
-const mapStateToProps = ({ generalReducer, appointmentReducer }) => ({
-  departmentList: generalReducer.departmentList,
-  selectedDepartment: appointmentReducer.selectedDepartment,
-  doctorList: appointmentReducer.doctorList,
+const mapStateToProps = ({ appointmentReducer }) => ({
+  selectedDoctor: appointmentReducer.selectedDoctor,
+  appointmentList: appointmentReducer.appointmentList,
 });
 
-const mapDispatchToProps = { setSelectedDoctor, findDoctorByDepartment };
+const mapDispatchToProps = { findAppointmentByDoctor };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DoctorSelect);
+export default connect(mapStateToProps, mapDispatchToProps)(AppointmentSelect);

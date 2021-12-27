@@ -21,3 +21,6 @@ export const FIND_DEPARTMENT_BY_URL = "/hospital/department/findById/";
 
 export const FIND_DOCTOR_BY_DEPARTMENT_URL =
   "/hospital/doctor/findAllByDepartment/";
+
+export const FIND_APPOINTMENT_BY_DOCTOR_URL =
+  "/hospital/doctor/getAppointmentByDoctor/";

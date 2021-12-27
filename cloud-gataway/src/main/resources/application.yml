@@ -29,11 +29,11 @@ spring:
           uri: lb://HOSPITAL-SERVICE
           predicates:
             - Path=/hospital/**
-        - id: USER-SERVICE
+        - id: APPOINTMENT-SERVICE
           uri: lb://APPOINTMENT-SERVICE
           predicates:
             - Path=/appointment/**
-        - id: USER-SERVICE
+        - id: ANALYSIS-SERVICE
           uri: lb://ANALYSIS-SERVICE
           predicates:
             - Path=/analysis/**

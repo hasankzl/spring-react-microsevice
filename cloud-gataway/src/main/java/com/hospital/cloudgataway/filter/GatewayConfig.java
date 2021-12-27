@@ -18,6 +18,9 @@ public class GatewayConfig {
                 .route("HOSPITAL-SERVICE", r -> r.path("/hospital/**")
                         .filters(f -> f.filter(filter))
                         .uri("lb://HOSPITAL-SERVICE"))
+                .route("APPOINTMENT-SERVICE", r -> r.path("/appointment/**")
+                        .filters(f -> f.filter(filter))
+                        .uri("lb://APPOINTMENT-SERVICE"))
                 .build();
     }
 

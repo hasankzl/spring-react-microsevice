@@ -77,7 +77,7 @@ const HeaderLinks = ({
         />
       </ListItem>
       <ListItem className={classes.listItem}>
-        <Link to="/" className={classes.navLink}>
+        <Link to="/appointment-page" className={classes.navLink}>
           {t("header.appointment")}
         </Link>
       </ListItem>

@@ -1,5 +1,7 @@
 server:
   port: 9003
+  servlet:
+    context-path: /appointment
 
 spring:
   application:

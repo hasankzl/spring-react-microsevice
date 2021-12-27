@@ -1,17 +1,19 @@
 import axios from "axios";
 import { GENERAL_FIND_DEPARTMENT } from "./actionTypes";
-import { DEPARTMENT_FIND_ALL_URL } from "./constants";
+import { DEPARTMENT_FIND_ALL_FOR_LIST_URL } from "./constants";
 
 export const generalFindAllDepartment = () => async (dispatch) => {
   await axios
-    .get(DEPARTMENT_FIND_ALL_URL)
+    .get(DEPARTMENT_FIND_ALL_FOR_LIST_URL)
     .then((res) => {
-      dispatch({
-        type: GENERAL_FIND_DEPARTMENT,
-        payload: {
-          data: res.data,
-        },
-      });
+      if (res.status == 200) {
+        dispatch({
+          type: GENERAL_FIND_DEPARTMENT,
+          payload: {
+            data: res.data,
+          },
+        });
+      }
     })
     .catch((err) => {
       console.log(err);

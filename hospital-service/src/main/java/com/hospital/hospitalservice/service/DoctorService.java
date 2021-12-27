@@ -1,6 +1,7 @@
 package com.hospital.hospitalservice.service;
 
 import com.hospital.hospitalservice.model.Doctor;
+import com.hospital.hospitalservice.projection.DoctorAppointmentProjection;
 import com.hospital.hospitalservice.projection.DoctorProjection;
 
 import java.util.List;
@@ -14,5 +15,5 @@ public interface DoctorService {
 
     List<DoctorProjection> findAll();
 
-
+    List<DoctorAppointmentProjection> findAllAppointmentProjection(Long id);
 }

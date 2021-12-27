@@ -2,12 +2,14 @@ package com.hospital.hospitalservice.resource;
 
 
 import com.hospital.hospitalservice.model.Doctor;
+import com.hospital.hospitalservice.projection.DoctorAppointmentProjection;
 import com.hospital.hospitalservice.projection.DoctorProjection;
 import com.hospital.hospitalservice.service.DoctorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.Path;
 import java.util.List;
 
 @RestController
@@ -35,6 +37,11 @@ public class DoctorResource {
     public List<DoctorProjection> findAll(){
 
        return doctorService.findAll();
+    }
+
+    @GetMapping("/findAllByDepartment/{id}")
+    public List<DoctorAppointmentProjection> findAllByDepartment(@PathVariable Long id){
+        return doctorService.findAllAppointmentProjection(id);
     }
 
 }

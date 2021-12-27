@@ -2,6 +2,7 @@ package com.hospital.hospitalservice.resource;
 
 
 import com.hospital.hospitalservice.model.Department;
+import com.hospital.hospitalservice.projection.DepartmentListProjection;
 import com.hospital.hospitalservice.projection.DepartmentPageProjection;
 import com.hospital.hospitalservice.projection.DepartmentProjection;
 import com.hospital.hospitalservice.service.DepartmentService;
@@ -35,6 +36,12 @@ public class DepartmentResource {
     private List<DepartmentProjection> findAll(){
         return departmentService.findAll();
     }
+
+    @GetMapping("/findAllForList")
+    private List<DepartmentListProjection> findAllForList(){
+        return departmentService.findAllForList();
+    }
+
     @GetMapping("/findById/{id}")
     private DepartmentPageProjection findByUrl (@PathVariable Long id){
 

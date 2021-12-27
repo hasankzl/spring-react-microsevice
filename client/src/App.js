@@ -22,6 +22,7 @@ import DoctorPage from "views/DoctorPage/DoctorPage.js";
 import { generalFindAllDepartment } from "utils/action.js";
 import { useEffect } from "react";
 import DepartmentPage from "views/DepartmentPage/DepartmentPage.js";
+import AppointmentPage from "views/AppointmentPage/AppointmentPage.js";
 
 var hist = createBrowserHistory();
 
@@ -42,6 +43,7 @@ const App = ({
           path="/department-page/:departmentId"
           element={<DepartmentPage />}
         />
+        <Route path="/appointment-page" element={<AppointmentPage />} />
         <Route path="/profile-page" element={<ProfilePage />} />
         <Route path="/login-page" element={<LoginPage />} />
         <Route path="/register-page" element={<RegisterPage />} />

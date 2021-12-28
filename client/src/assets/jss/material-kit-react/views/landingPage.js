@@ -25,6 +25,14 @@ const landingPageStyle = {
     position: "relative",
     zIndex: "3",
   },
+  carousel: {
+    height: "550px",
+    width: "100%",
+    "& img": {
+      height: "200px",
+      width: "-webkit-fill-available",
+    },
+  },
   mainRaised: {
     margin: "-60px 30px 0px",
     borderRadius: "6px",

@@ -6,6 +6,7 @@ import {
   APPOINTMENT_CLEAR_REDUCER,
   APPOINTMENT_SELECT_DOCTOR,
   APPOINTMENT_SET_APPOINTMENTLIST,
+  SET_APPOINTMENT_CAROUSEL,
 } from "utils/actionTypes";
 
 const initialState = {
@@ -52,6 +53,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         carouselPage: state.carouselPage + 1,
+      };
+    case SET_APPOINTMENT_CAROUSEL:
+      return {
+        ...state,
+        carouselPage: action.payload.data,
       };
     case APPOINTMENT_CLEAR_REDUCER:
       return initialState;

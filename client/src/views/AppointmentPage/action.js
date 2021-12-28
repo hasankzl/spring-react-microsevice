@@ -8,6 +8,7 @@ import {
   APPOINTMENT_CLEAR_REDUCER,
   APPOINTMENT_SELECT_DOCTOR,
   APPOINTMENT_SET_APPOINTMENTLIST,
+  SET_APPOINTMENT_CAROUSEL,
 } from "utils/actionTypes";
 import {
   DOCTOR_FIND_ALL_URL,
@@ -84,6 +85,15 @@ export const nextPage = () => async (dispatch) => {
 export const prevPage = () => async (dispatch) => {
   dispatch({
     type: PREV_APPOINTMENT_CAROUSEL,
+  });
+};
+
+export const setPage = (page) => (dispatch) => {
+  dispatch({
+    type: SET_APPOINTMENT_CAROUSEL,
+    payload: {
+      data: page,
+    },
   });
 };
 

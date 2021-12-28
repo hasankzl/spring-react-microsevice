@@ -13,6 +13,26 @@ import IconButton from "@material-ui/core/IconButton";
 import EventNoteIcon from "@mui/icons-material/EventNote";
 const useStyles = makeStyles(styles);
 
+var dateObj = new Date();
+const nextFiveDayWithoutWeekend = [];
+for (let i = 0; nextFiveDayWithoutWeekend.length <= 4; i++) {
+  var weekday = dateObj.toLocaleString("default", { weekday: "long" });
+
+  if (weekday != "Saturday" || weekday != "Sunday") {
+    nextFiveDayWithoutWeekend.push({
+      date:
+        dateObj.getFullYear() +
+        "-" +
+        dateObj.getMonth() +
+        "-" +
+        dateObj.getDay(),
+      weekday,
+    });
+  }
+  dateObj.setDate(dateObj.getDate() + 1);
+}
+
+console.log(nextFiveDayWithoutWeekend);
 const AppointmentSelect = ({
   selectedDoctor,
   appointmentList,
@@ -27,30 +47,28 @@ const AppointmentSelect = ({
   const classes = useStyles();
 
   return (
-    <div className={classes.section}>
+    <div>
       <GridContainer justify="center">
-        {selectedDoctor.name}
-        {appointmentList.map((appointment) => (
-          <GridItem md={3}>
+        <GridItem>
+          {`${selectedDoctor.specialty} ${selectedDoctor.name} ${selectedDoctor.surname} `}
+        </GridItem>
+      </GridContainer>
+      {nextFiveDayWithoutWeekend.map((date) => (
+        <GridContainer>
+          <GridItem md={12}>
             <Card className={classes.root}>
               <CardHeader
-                avatar={
-                  <Avatar aria-label="recipe" className={classes.avatar}>
-                    :)
-                  </Avatar>
-                }
+                avatar={date.weekday}
                 action={
                   <IconButton aria-label="settings">
                     <EventNoteIcon />
                   </IconButton>
                 }
-                title={`${appointment.name} ${appointment.surname}`}
-                subheader={appointment.specialty}
               />
             </Card>
           </GridItem>
-        ))}
-      </GridContainer>
+        </GridContainer>
+      ))}
     </div>
   );
 };

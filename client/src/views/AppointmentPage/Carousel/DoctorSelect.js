@@ -26,7 +26,7 @@ const DoctorSelect = ({
   }, [selectedDepartment]);
   const classes = useStyles();
   return (
-    <div className={classes.section}>
+    <div>
       <GridContainer justify="center">
         {doctorList.map((doctor) => (
           <GridItem md={3}>

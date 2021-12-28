@@ -20,7 +20,7 @@ const DepartmentSelect = ({
     _setSelectedDepartment(data);
   };
   return (
-    <div className={classes.section}>
+    <div>
       <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={8}>
           <FormControl fullWidth>

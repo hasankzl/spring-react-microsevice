@@ -22,11 +22,7 @@ export default function ProductSection() {
   const classes = useStyles();
   return (
     <div className={classes.section}>
-      <GridContainer justify="center">
-        <GridItem xs={12} sm={12} md={8}>
-          <h2 className={classes.title}>Randevu Sistemi</h2>
-        </GridItem>
-      </GridContainer>
+      <h2 className={classes.title}>Randevu Sistemi</h2>
     </div>
   );
 }

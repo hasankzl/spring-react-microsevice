@@ -2,6 +2,8 @@ package com.hospital.appointmentservice.resource;
 
 
 import com.hospital.appointmentservice.model.Appointment;
+import com.hospital.appointmentservice.payload.AppointmentWithDoctor;
+import com.hospital.appointmentservice.projection.AppointmentProjection;
 import com.hospital.appointmentservice.service.AppointmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +19,9 @@ public class AppointmentResource {
 
 
     @PostMapping("/save")
-    private void save(@RequestBody Appointment appointment){
+    private void save(@RequestBody Appointment appointment,@RequestHeader("userId") Long userId){
 
+        appointment.setUserId(userId);
         appointmentService.save(appointment);
     }
 
@@ -31,13 +34,13 @@ public class AppointmentResource {
 
 
     @GetMapping("/getAppointmentByDoctor/{id}")
-    private List<Appointment> getAppointmentByDoctor(@PathVariable Long id){
+    private List<AppointmentProjection> getAppointmentByDoctor(@PathVariable Long id){
 
         return appointmentService.geAppointmentByDoctor(id);
     }
 
     @GetMapping("/getAppointmentByUser/{id}")
-    private List<Appointment> getAppointmentByUser(@PathVariable Long id){
+    private List<AppointmentWithDoctor> getAppointmentByUser(@PathVariable Long id){
 
         return appointmentService.geAppointmentByUser(id);
     }

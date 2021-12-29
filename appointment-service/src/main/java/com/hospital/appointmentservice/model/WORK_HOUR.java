@@ -6,7 +6,7 @@ public enum WORK_HOUR {
     ELEVEN ("11"),
     TWELVE ("12"),
     FOURTEEN ("13"),
-    FIVETEEN ("14"),
+    FIFTEEN("14"),
     SIXTEEN ("15"),
     SEVENTEEN ("16"),
     EIGHTEEN ("17");

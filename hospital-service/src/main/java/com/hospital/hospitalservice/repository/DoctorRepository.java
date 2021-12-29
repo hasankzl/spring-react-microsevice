@@ -11,5 +11,5 @@ public interface DoctorRepository extends JpaRepository<Doctor,Long> {
 
     List<DoctorProjection> findAllProjectedBy();
     List<DoctorAppointmentProjection> findByDepartmentId(Long id);
-
+    DoctorProjection findProjectedById(Long id);
 }

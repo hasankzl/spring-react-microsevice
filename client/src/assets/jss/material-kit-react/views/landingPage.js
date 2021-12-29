@@ -26,8 +26,9 @@ const landingPageStyle = {
     zIndex: "3",
   },
   carousel: {
-    height: "550px",
+    height: "650px",
     width: "100%",
+    padding: "40px",
     "& img": {
       height: "200px",
       width: "-webkit-fill-available",

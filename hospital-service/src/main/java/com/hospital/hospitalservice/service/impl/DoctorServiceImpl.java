@@ -32,6 +32,11 @@ public class DoctorServiceImpl  implements DoctorService {
     }
 
     @Override
+    public DoctorProjection findById(Long id) {
+        return doctorRepository.findProjectedById(id);
+    }
+
+    @Override
     public List<DoctorAppointmentProjection> findAllAppointmentProjection(Long id) {
         return doctorRepository.findByDepartmentId(id);
     }

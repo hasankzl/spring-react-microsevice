@@ -21,20 +21,28 @@ public class Appointment {
     @DateTimeFormat(pattern="dd/MM/yyyy")
     private Date appointmentDay;
 
-    private WORK_HOUR work_hour;
+    private WORK_HOUR workHour;
 
-    private APPOINTMENT_MINUTE appointment_minute;
+    private APPOINTMENT_MINUTE appointmentMinute;
 
     private Long doctorId;
 
     private Long userId;
 
 
-    public String getWork_hour() {
-        return work_hour.toString();
+    public String getWorkHour() {
+        return workHour.toString();
     }
 
-    public String getAppointment_minute() {
-        return appointment_minute.toString();
+    public String getAppointmentMinute() {
+        return appointmentMinute.toString();
+    }
+
+    public void setWorkHour(String workHour) {
+        this.workHour = WORK_HOUR.valueOf(workHour);
+    }
+
+    public void setAppointmentMinute(String appointmentMinute) {
+        this.appointmentMinute = APPOINTMENT_MINUTE.valueOf(appointmentMinute);
     }
 }

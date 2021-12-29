@@ -39,6 +39,11 @@ public class DoctorResource {
        return doctorService.findAll();
     }
 
+    @GetMapping("/findById/{id}")
+    public DoctorProjection findById(@PathVariable Long id){
+        return doctorService.findById(id);
+    }
+
     @GetMapping("/findAllByDepartment/{id}")
     public List<DoctorAppointmentProjection> findAllByDepartment(@PathVariable Long id){
         return doctorService.findAllAppointmentProjection(id);

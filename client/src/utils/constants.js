@@ -23,4 +23,6 @@ export const FIND_DOCTOR_BY_DEPARTMENT_URL =
   "/hospital/doctor/findAllByDepartment/";
 
 export const FIND_APPOINTMENT_BY_DOCTOR_URL =
-  "/hospital/doctor/getAppointmentByDoctor/";
+  "/appointment/getAppointmentByDoctor/";
+
+export const SAVE_APPOINTMENT_URL = "/appointment/save";

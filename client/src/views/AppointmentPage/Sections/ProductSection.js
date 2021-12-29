@@ -21,7 +21,7 @@ const useStyles = makeStyles(styles);
 export default function ProductSection() {
   const classes = useStyles();
   return (
-    <div className={classes.section}>
+    <div className={classes.section} style={{ padding: 10 }}>
       <h2 className={classes.title}>Randevu Sistemi</h2>
     </div>
   );

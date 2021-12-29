@@ -15,5 +15,6 @@ public interface DoctorService {
 
     List<DoctorProjection> findAll();
 
+    DoctorProjection findById(Long id);
     List<DoctorAppointmentProjection> findAllAppointmentProjection(Long id);
 }

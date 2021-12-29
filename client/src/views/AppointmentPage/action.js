@@ -14,7 +14,9 @@ import {
   DOCTOR_FIND_ALL_URL,
   FIND_DOCTOR_BY_DEPARTMENT_URL,
   FIND_APPOINTMENT_BY_DOCTOR_URL,
+  SAVE_APPOINTMENT_URL,
 } from "utils/constants";
+import notification from "utils/notification";
 
 export const findAllDoctor = async () => {
   const doctorList = await axios.get(DOCTOR_FIND_ALL_URL).then((res) => {
@@ -100,5 +102,13 @@ export const setPage = (page) => (dispatch) => {
 export const clearReducer = () => (dispatch) => {
   dispatch({
     type: APPOINTMENT_CLEAR_REDUCER,
+  });
+};
+
+export const saveAppointment = (data) => async (dispatch) => {
+  await axios.post(SAVE_APPOINTMENT_URL, data).then((res) => {
+    if (res.status == 200) {
+      notification.success({ message: "yeni randevu başarıyla  eklendi" });
+    }
   });
 };

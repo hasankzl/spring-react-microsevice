@@ -2,6 +2,7 @@ package com.hospital.authservice.service;
 
 
 import com.hospital.authservice.model.Person;
+import com.hospital.authservice.model.UserDetail;
 import com.hospital.authservice.service.PersonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,14 +26,19 @@ public class UserService  implements UserDetailsService {
 
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetail loadUserByUsername(String email) throws UsernameNotFoundException {
         Person person = personService.findByEmail(email);
 
         List<GrantedAuthority> list = new ArrayList<>();
         GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(person.getRole());
         list.add(grantedAuthority);
         if(person != null){
-            return new User(email,person.getPassword(),list);
+            UserDetail userDetail = new UserDetail();
+            userDetail.setId(person.getId());
+            userDetail.setEmail(email);
+            userDetail.setPassword(person.getPassword());
+            userDetail.setAuthorities(list);
+            return userDetail;
         }
         else{
             throw new UsernameNotFoundException("not found");

@@ -3,6 +3,7 @@ package com.hospital.appointmentservice.resource;
 
 import com.hospital.appointmentservice.model.Appointment;
 import com.hospital.appointmentservice.payload.AppointmentWithDoctor;
+import com.hospital.appointmentservice.payload.AppointmentWithPerson;
 import com.hospital.appointmentservice.projection.AppointmentProjection;
 import com.hospital.appointmentservice.service.AppointmentService;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +35,7 @@ public class AppointmentResource {
 
 
     @GetMapping("/getAppointmentByDoctor/{id}")
-    private List<AppointmentProjection> getAppointmentByDoctor(@PathVariable Long id){
+    private List<AppointmentWithPerson> getAppointmentByDoctor(@PathVariable Long id){
 
         return appointmentService.geAppointmentByDoctor(id);
     }

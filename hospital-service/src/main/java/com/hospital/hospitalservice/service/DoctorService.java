@@ -1,6 +1,7 @@
 package com.hospital.hospitalservice.service;
 
 import com.hospital.hospitalservice.model.Doctor;
+import com.hospital.hospitalservice.payload.DoctorWithAppointment;
 import com.hospital.hospitalservice.projection.DoctorAppointmentProjection;
 import com.hospital.hospitalservice.projection.DoctorProjection;
 
@@ -17,4 +18,6 @@ public interface DoctorService {
 
     DoctorProjection findById(Long id);
     List<DoctorAppointmentProjection> findAllAppointmentProjection(Long id);
+
+    DoctorWithAppointment getDoctorWithAppointment(Long id);
 }

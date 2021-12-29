@@ -2,6 +2,7 @@ package com.hospital.hospitalservice.resource;
 
 
 import com.hospital.hospitalservice.model.Doctor;
+import com.hospital.hospitalservice.payload.DoctorWithAppointment;
 import com.hospital.hospitalservice.projection.DoctorAppointmentProjection;
 import com.hospital.hospitalservice.projection.DoctorProjection;
 import com.hospital.hospitalservice.service.DoctorService;
@@ -49,4 +50,9 @@ public class DoctorResource {
         return doctorService.findAllAppointmentProjection(id);
     }
 
+    @GetMapping("/getDoctorWithAppointment/{id}")
+    public DoctorWithAppointment getDoctorWithAppointment(@PathVariable Long id){
+
+        return  doctorService.getDoctorWithAppointment(id);
+    }
 }

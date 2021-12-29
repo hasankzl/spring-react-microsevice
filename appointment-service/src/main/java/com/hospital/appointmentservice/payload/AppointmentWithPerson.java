@@ -1,16 +1,18 @@
 package com.hospital.appointmentservice.payload;
 
-import com.hospital.appointmentservice.model.Appointment;
+
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 @Data
-public class AppointmentWithDoctor {
+public class AppointmentWithPerson {
+
 
     private Long id;
     private String workHour;
     private String AppointmentMinute;
     private Date appointmentDay;
-    private Doctor doctor;
+    private Person person;
 }

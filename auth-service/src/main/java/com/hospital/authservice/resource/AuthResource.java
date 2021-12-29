@@ -70,7 +70,12 @@ public class AuthResource {
 
     @GetMapping("/getUserWithAppointment")
     public UserWithAppointment getUserWithAppoinment(@RequestHeader("userId") Long userId) {
-
         return personService.getUserWithAppointment(userId);
+    }
+
+    @GetMapping("/findPersonById/{id}")
+    public Person findPersonById(@PathVariable Long id){
+
+        return personService.findById(id);
     }
 }

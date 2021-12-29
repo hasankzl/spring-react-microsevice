@@ -2,8 +2,9 @@ package com.hospital.appointmentservice.service.impl;
 
 import com.hospital.appointmentservice.model.Appointment;
 import com.hospital.appointmentservice.payload.AppointmentWithDoctor;
+import com.hospital.appointmentservice.payload.AppointmentWithPerson;
 import com.hospital.appointmentservice.payload.Doctor;
-import com.hospital.appointmentservice.projection.AppointmentProjection;
+import com.hospital.appointmentservice.payload.Person;
 import com.hospital.appointmentservice.repository.AppointmentRepository;
 import com.hospital.appointmentservice.service.AppointmentService;
 import lombok.RequiredArgsConstructor;
@@ -11,8 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 
@@ -38,9 +37,32 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public List<AppointmentProjection> geAppointmentByDoctor(Long id) {
+    public List<AppointmentWithPerson> geAppointmentByDoctor(Long id) {
 
-        return appointmentRepository.findByDoctorId(id);
+        List<Appointment> appointmentList= appointmentRepository.findByDoctorId(id);
+        List<AppointmentWithPerson> appointmentWithPersonList= new ArrayList<>();
+
+        appointmentList.forEach(appointment -> {
+            AppointmentWithPerson appointmentWithPerson = new AppointmentWithPerson();
+            appointmentWithPerson.setId(appointment.getId());
+            appointmentWithPerson.setAppointmentMinute(appointment.getAppointmentMinute());
+            appointmentWithPerson.setWorkHour(appointment.getWorkHour());
+            appointmentWithPerson.setAppointmentDay(appointment.getAppointmentDay());
+            Person person =
+                    webClientBuilder.build()
+                            .get()
+                            .uri("http://AUTH-SERVICE/auth/findPersonById/"+appointment.getUserId())
+                            .retrieve()
+                            .bodyToMono(Person.class)
+                            .block();
+
+            appointmentWithPerson.setPerson(person);
+            appointmentWithPersonList.add(appointmentWithPerson);
+
+        });
+
+        return appointmentWithPersonList;
+
     }
 
     @Override
@@ -54,6 +76,8 @@ public class AppointmentServiceImpl implements AppointmentService {
             AppointmentWithDoctor appointmentWithDoctor = new AppointmentWithDoctor();
             appointmentWithDoctor.setWorkHour(appointment.getWorkHour());
             appointmentWithDoctor.setAppointmentMinute(appointment.getAppointmentMinute());
+            appointmentWithDoctor.setAppointmentDay(appointment.getAppointmentDay());
+            appointmentWithDoctor.setId(appointment.getId());
             Doctor doctor =
                     webClientBuilder.build()
                     .get()

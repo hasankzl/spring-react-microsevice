@@ -84,7 +84,7 @@ const HeaderLinks = ({
       {isLogin == true ? (
         <React.Fragment>
           <ListItem className={classes.listItem}>
-            <Link to="/" className={classes.navLink}>
+            <Link to="/profile-page" className={classes.navLink}>
               {user.email}
             </Link>
           </ListItem>

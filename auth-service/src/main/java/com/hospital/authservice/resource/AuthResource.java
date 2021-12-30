@@ -2,6 +2,7 @@ package com.hospital.authservice.resource;
 
 import com.hospital.authservice.exception.DuplicateUserException;
 import com.hospital.authservice.model.*;
+import com.hospital.authservice.projection.PersonProjection;
 import com.hospital.authservice.service.PersonService;
 import com.hospital.authservice.service.UserService;
 import com.hospital.authservice.security.JWTUtility;
@@ -13,15 +14,20 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.Path;
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class AuthResource {
 
 
     private final AuthenticationManager authenticationManager;
+
     private final JWTUtility jwtUtility;
 
     private final UserService userService;
+
     private final PersonService personService;
 
     @GetMapping("/")
@@ -77,5 +83,18 @@ public class AuthResource {
     public Person findPersonById(@PathVariable Long id){
 
         return personService.findById(id);
+    }
+
+    @GetMapping("/setAsDoctor/{userId}/{doctorId}")
+    public void setAsDoctor(@PathVariable Long userId, @PathVariable Long doctorId){
+
+         personService.setUserAsDoctor(userId,doctorId);
+    }
+
+
+        @GetMapping("/findAllPerson")
+    public List<PersonProjection> findAll(){
+
+        return personService.findAll();
     }
 }

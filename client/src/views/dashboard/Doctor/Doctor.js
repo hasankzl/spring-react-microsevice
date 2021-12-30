@@ -5,14 +5,16 @@ import DoctorFormModal from "./DoctorFormModal";
 import { Button } from "@material-ui/core";
 import DoctorTable from "./DoctorTable";
 import { findAllDepartment } from "../Department/action";
-import { findAllDoctor } from "./action";
+import { findAllDoctor, findAllUser } from "./action";
 const Doctor = ({
   findAllDepartment: _findAllDepartment,
   findAllDoctor: _findAllDoctor,
+  findAllUser: _findAllUser,
 }) => {
   useEffect(() => {
     _findAllDepartment();
     _findAllDoctor();
+    _findAllUser();
   }, []);
   const [modalShow, setModalShow] = useState(false);
 
@@ -24,12 +26,8 @@ const Doctor = ({
   );
 };
 
-Doctor.propTypes = {
-  props: PropTypes,
-};
-
 const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = { findAllDepartment, findAllDoctor };
+const mapDispatchToProps = { findAllDepartment, findAllDoctor, findAllUser };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Doctor);

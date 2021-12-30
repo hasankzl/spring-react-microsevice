@@ -139,10 +139,6 @@ const DepartmentFormModal = ({
   );
 };
 
-DepartmentFormModal.propTypes = {
-  props: PropTypes,
-};
-
 const mapStateToProps = ({ departmentReducer }) => ({
   editingDepartment: departmentReducer.editingDepartment,
 });

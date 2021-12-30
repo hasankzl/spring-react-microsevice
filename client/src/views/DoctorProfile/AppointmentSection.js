@@ -36,7 +36,7 @@ export default function TeamSection({ appointmentList, deleteAppointment }) {
   );
   return (
     <div className={classes.section}>
-      <h2 className={classes.title}>Günlük randevu ekranı Randevular</h2>
+      <h2 className={classes.title}>Günlük Randevu Ekranı </h2>
       <GridContainer>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">

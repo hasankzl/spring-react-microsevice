@@ -28,8 +28,8 @@ const DoctorSelect = ({
   return (
     <div>
       <GridContainer justify="center">
-        {doctorList.map((doctor) => (
-          <GridItem md={3}>
+        {doctorList.map((doctor, index) => (
+          <GridItem md={3} key={index}>
             <Card className={classes.root}>
               <CardHeader
                 avatar={

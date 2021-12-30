@@ -1,9 +1,15 @@
 import axios from "axios";
-import { FIND_DOCTOR } from "utils/actionTypes";
-import { EDIT_DOCTOR } from "utils/actionTypes";
+import {
+  EDIT_DOCTOR,
+  GET_ALL_USER_DOCTOR,
+  FIND_DOCTOR,
+} from "utils/actionTypes";
 import { DOCTOR_FIND_ALL_URL } from "utils/constants";
-import { DOCTOR_SAVE_URL } from "utils/constants";
-import { DOCTOR_DELETE_URL } from "utils/constants";
+import {
+  DOCTOR_DELETE_URL,
+  FIND_ALL_PERSON_URL,
+  DOCTOR_SAVE_URL,
+} from "utils/constants";
 import notification from "utils/notification";
 import { t } from "i18next";
 export const setEditDoctor = (doctor) => async (dispatch) => {
@@ -46,6 +52,19 @@ export const findAllDoctor = () => async (dispatch) => {
     if (res.status == 200) {
       dispatch({
         type: FIND_DOCTOR,
+        payload: {
+          data: res.data,
+        },
+      });
+    }
+  });
+};
+
+export const findAllUser = () => async (dispatch) => {
+  await axios.get(FIND_ALL_PERSON_URL).then((res) => {
+    if (res.status === 200) {
+      dispatch({
+        type: GET_ALL_USER_DOCTOR,
         payload: {
           data: res.data,
         },

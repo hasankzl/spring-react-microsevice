@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.hospital</groupId>
 	<artifactId>hospital-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.1</version>
 	<name>hospital-service</name>
 	<description>hospital-service</description>
 	<properties>
@@ -68,11 +68,13 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version> 1.2.7.RELEASE </version>
 				<configuration>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
+
 						</exclude>
 					</excludes>
 				</configuration>

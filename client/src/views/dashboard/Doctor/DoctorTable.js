@@ -60,10 +60,6 @@ const DoctorTable = ({
   );
 };
 
-DoctorTable.propTypes = {
-  props: PropTypes,
-};
-
 const mapStateToProps = ({ doctorReducer }) => ({
   doctorList: doctorReducer.doctorList,
 });

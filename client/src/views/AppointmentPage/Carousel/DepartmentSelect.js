@@ -32,13 +32,13 @@ const DepartmentSelect = ({
               inputProps={{
                 name: "age",
                 id: "uncontrolled-native",
+                value: JSON.stringify(selectedDepartment),
               }}
-              value={JSON.stringify(selectedDepartment)}
               onChange={handleChange}
             >
               <option>Lütfen bir seçim yapınız</option>
-              {departmentList.map((department) => (
-                <option value={JSON.stringify(department)}>
+              {departmentList.map((department, index) => (
+                <option key={index} value={JSON.stringify(department)}>
                   {department.name}
                 </option>
               ))}

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hospital.authservice.model.AppointmentWithDoctor;
 import com.hospital.authservice.model.Person;
 import com.hospital.authservice.model.UserWithAppointment;
+import com.hospital.authservice.projection.PersonProjection;
 import com.hospital.authservice.repository.PersonRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -61,5 +62,19 @@ public class PersonService {
         person.setPassword("");
         userWithAppointment.setPerson(person);
         return userWithAppointment;
+    }
+
+    public void setUserAsDoctor(Long userId,Long doctorId){
+
+        Person person = findById(userId);
+
+        person.setDoctorId(doctorId);
+
+        personRepository.save(person);
+    }
+
+    public List<PersonProjection> findAll(){
+
+        return personRepository.findAllProjectedBy();
     }
 }

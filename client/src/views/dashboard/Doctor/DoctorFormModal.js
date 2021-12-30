@@ -129,7 +129,9 @@ const DoctorFormModal = ({
               onChange={handleInput}
             >
               {departmentList.map((dep) => (
-                <MenuItem value={dep.id}>{dep.name}</MenuItem>
+                <MenuItem key={dep.id} value={dep.id}>
+                  {dep.name}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -173,10 +175,6 @@ const DoctorFormModal = ({
       </Box>
     </Modal>
   );
-};
-
-DoctorFormModal.propTypes = {
-  props: PropTypes,
 };
 
 const mapStateToProps = ({ doctorReducer }) => ({

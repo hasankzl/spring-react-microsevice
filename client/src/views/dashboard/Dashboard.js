@@ -139,7 +139,6 @@ function DashboardContent() {
               component="h1"
               variant="h6"
               color="inherit"
-              noWrap
               sx={{ flexGrow: 1 }}
               component={Link}
               to="/dashboard"
@@ -151,7 +150,6 @@ function DashboardContent() {
               <Button
                 component="h4"
                 color="inherit"
-                noWrap
                 onClick={() => changeLanguage(LANG_TR)}
                 sx={{ flexGrow: 1 }}
               >
@@ -161,7 +159,6 @@ function DashboardContent() {
               <Button
                 component="h4"
                 color="inherit"
-                noWrap
                 onClick={() => changeLanguage(LANG_EN)}
                 sx={{ flexGrow: 1 }}
               >

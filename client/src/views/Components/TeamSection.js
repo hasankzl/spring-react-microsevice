@@ -36,8 +36,8 @@ export default function TeamSection({ doctorList }) {
       <h2 className={classes.title}>Doktorlarımız</h2>
       <div>
         <GridContainer>
-          {doctorList.map((doctor) => (
-            <GridItem xs={12} sm={12} md={4}>
+          {doctorList.map((doctor, index) => (
+            <GridItem xs={12} sm={12} md={4} key={index}>
               <Card plain>
                 <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
                   <img src={team1} alt="..." className={imageClasses} />

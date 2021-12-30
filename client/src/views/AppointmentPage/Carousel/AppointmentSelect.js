@@ -119,8 +119,8 @@ const AppointmentSelect = ({
           </Card>
         </GridItem>
       </GridContainer>
-      {nextFiveDayWithoutWeekend.map((date) => (
-        <GridContainer spacing={2}>
+      {nextFiveDayWithoutWeekend.map((date, index) => (
+        <GridContainer spacing={2} key={index}>
           <GridItem md={12}>
             <Card className={classes.root} style={{ display: "flex" }}>
               <CardHeader avatar={date.weekday} />

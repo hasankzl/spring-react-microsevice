@@ -3,12 +3,14 @@ import {
   FIND_DOCTOR,
   FIND_DEPARTMENT,
   SAVE_EDIT_DOCTOR,
+  GET_ALL_USER_DOCTOR,
 } from "utils/actionTypes";
 
 const initialState = {
   departmentList: [],
   editingDoctor: {},
   doctorList: [],
+  userList: [],
 };
 
 export default (state = initialState, action) => {
@@ -33,6 +35,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         editingDoctor: {},
+      };
+    case GET_ALL_USER_DOCTOR:
+      return {
+        ...state,
+        userList: action.payload.data,
       };
     default:
       return state;

@@ -19,10 +19,6 @@ export const Department = ({ findAllDepartment: _findAllDepartment }) => {
   );
 };
 
-Department.propTypes = {
-  props: PropTypes,
-};
-
 const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = { findAllDepartment };

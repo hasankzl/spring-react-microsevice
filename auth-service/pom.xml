@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.hospital</groupId>
 	<artifactId>auth-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.1</version>
 	<name>auth-service</name>
 	<description>auth-service</description>
 	<properties>
@@ -84,6 +84,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version> 1.2.7.RELEASE </version>
 				<configuration>
 					<excludes>
 						<exclude>

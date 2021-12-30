@@ -38,11 +38,7 @@ const AppointmentPage = ({
   const classes = useStyles();
   return (
     <div>
-      <Parallax
-        filter
-        image={require("assets/img/landing-bg.jpg").default}
-        style={{ overflow: "unset" }}
-      >
+      <Parallax filter image={require("assets/img/landing-bg.jpg").default}>
         <div className={classes.container}>
           <div
             style={{ marginTop: 100, marginBottom: 20 }}

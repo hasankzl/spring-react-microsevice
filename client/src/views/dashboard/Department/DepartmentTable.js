@@ -61,10 +61,6 @@ const DepartmentTable = ({
   );
 };
 
-DepartmentTable.propTypes = {
-  props: PropTypes,
-};
-
 const mapStateToProps = ({ departmentReducer }) => ({
   departmentList: departmentReducer.departmentList,
 });

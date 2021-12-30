@@ -29,5 +29,5 @@ public class Person {
     @Column(name="role")
     private String role;
 
-
+    private Long doctorId;
 }

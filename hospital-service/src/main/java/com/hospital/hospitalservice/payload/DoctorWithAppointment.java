@@ -8,5 +8,5 @@ import java.util.List;
 @Data
 public class DoctorWithAppointment {
     private DoctorProjection doctor;
-    private List<AppointmentWithPerson> appointmentWithPersonList;
+    private List<AppointmentWithPerson> appointmentList;
 }

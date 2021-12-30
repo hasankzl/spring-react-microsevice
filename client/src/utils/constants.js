@@ -29,4 +29,6 @@ export const SAVE_APPOINTMENT_URL = "/appointment/save";
 
 export const FIND_USER_WITH_APPOINTMENT_URL = "/auth/getUserWithAppointment";
 
+export const FIND_DOCTOR_WITH_APPOINTMENT_URL =
+  "/hospital/doctor/getDoctorWithAppointment/";
 export const DELETE_APPOINTMENT_URL = "/appointment/delete/";

@@ -1,6 +1,7 @@
 package com.hospital.appointmentservice.model;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -18,7 +19,7 @@ public class Appointment {
 
     private Date createdDate = new Date();
 
-    @DateTimeFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Europe/Istanbul")
     private Date appointmentDay;
 
     private WORK_HOUR workHour;

@@ -5,6 +5,7 @@ import doctorReducer from "views/dashboard/Doctor/reducer";
 import generalReducer from "utils/reducer";
 import appointmentReducer from "views/AppointmentPage/reducer";
 import profileReducer from "views/ProfilePage/reducer";
+import doctorProfileReducer from "views/DoctorProfile/reducer";
 export default combineReducers({
   loginReducer,
   departmentReducer,
@@ -12,4 +13,5 @@ export default combineReducers({
   generalReducer,
   appointmentReducer,
   profileReducer,
+  doctorProfileReducer,
 });

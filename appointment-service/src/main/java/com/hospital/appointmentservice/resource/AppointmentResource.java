@@ -9,6 +9,7 @@ import com.hospital.appointmentservice.service.AppointmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -35,9 +36,15 @@ public class AppointmentResource {
 
 
     @GetMapping("/getAppointmentByDoctor/{id}")
-    private List<AppointmentWithPerson> getAppointmentByDoctor(@PathVariable Long id){
+    private List<AppointmentProjection> getAppointmentByDoctor(@PathVariable Long id) throws ParseException {
 
-        return appointmentService.geAppointmentByDoctor(id);
+        return appointmentService.getAppointmentByDoctor(id);
+    }
+
+    @GetMapping("getTodayAppointmentWithUserByDoctor/{id}")
+    private List<AppointmentWithPerson> getAppointmentWithUserByDoctor(@PathVariable Long id) throws ParseException {
+
+        return appointmentService.geAppointmentWithPersonByDoctor(id);
     }
 
     @GetMapping("/getAppointmentByUser/{id}")

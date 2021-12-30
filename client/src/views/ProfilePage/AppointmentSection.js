@@ -9,7 +9,6 @@ import { makeStyles } from "@material-ui/core/styles";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
@@ -19,12 +18,11 @@ import styles from "assets/jss/material-kit-react/views/landingPageSections/team
 import team1 from "assets/img/faces/avatar.jpg";
 import team2 from "assets/img/faces/christian.jpg";
 import team3 from "assets/img/faces/kendall.jpg";
-import { ButtonUnstyled } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 const useStyles = makeStyles(styles);
 
-export default function TeamSection({ doctorList }) {
+export default function TeamSection({ appointmentList, deleteAppointment }) {
   const classes = useStyles();
   const imageClasses = classNames(
     classes.imgRaised,
@@ -33,54 +31,39 @@ export default function TeamSection({ doctorList }) {
   );
   return (
     <div className={classes.section}>
-      <h2 className={classes.title}>Doktorlarımız</h2>
+      <h2 className={classes.title}>Randevularınız</h2>
       <div>
         <GridContainer>
-          {doctorList.map((doctor) => (
+          {appointmentList.map((appointment) => (
             <GridItem xs={12} sm={12} md={4}>
               <Card plain>
                 <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
                   <img src={team1} alt="..." className={imageClasses} />
                 </GridItem>
                 <h4 className={classes.cardTitle}>
-                  {doctor.name} {doctor.surname}
+                  {`${appointment.doctor.name} ${appointment.doctor.surname}`}
                   <br />
                   <small className={classes.smallTitle}>
-                    {doctor.specialty}
+                    {appointment.doctor.department.name}
                   </small>
                 </h4>
                 <CardBody>
                   <p className={classes.description}>
-                    {doctor.department.name}
+                    {`randevu saatiniz : ${appointment.workHour}:${
+                      appointment.appointmentMinute
+                    } , ${appointment.appointmentDay.substring(0, 10)}`}
                   </p>
-                  <Button component={Link} to={"/doctor-profile/" + doctor.id}>
-                    Profile Git
-                  </Button>
                 </CardBody>
-                <CardFooter className={classes.justifyCenter}>
-                  <Button
-                    justIcon
-                    color="transparent"
-                    className={classes.margin5}
-                  >
-                    <i className={classes.socials + " fab fa-twitter"} />
-                  </Button>
-                  <Button
-                    justIcon
-                    color="transparent"
-                    className={classes.margin5}
-                  >
-                    <i className={classes.socials + " fab fa-instagram"} />
-                  </Button>
-                  <Button
-                    justIcon
-                    color="transparent"
-                    className={classes.margin5}
-                  >
-                    <i className={classes.socials + " fab fa-facebook"} />
-                  </Button>
-                </CardFooter>
+                <CardFooter className={classes.justifyCenter}></CardFooter>
               </Card>
+              <Button
+                onClick={() => {
+                  deleteAppointment(appointment.id);
+                }}
+                variant="primary"
+              >
+                İptal
+              </Button>
             </GridItem>
           ))}
         </GridContainer>

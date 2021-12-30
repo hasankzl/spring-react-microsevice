@@ -5,13 +5,17 @@ import com.hospital.appointmentservice.payload.AppointmentWithDoctor;
 import com.hospital.appointmentservice.payload.AppointmentWithPerson;
 import com.hospital.appointmentservice.payload.Doctor;
 import com.hospital.appointmentservice.payload.Person;
+import com.hospital.appointmentservice.projection.AppointmentProjection;
 import com.hospital.appointmentservice.repository.AppointmentRepository;
 import com.hospital.appointmentservice.service.AppointmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -37,12 +41,17 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public List<AppointmentWithPerson> geAppointmentByDoctor(Long id) {
+    public List<AppointmentWithPerson> geAppointmentWithPersonByDoctor(Long id) throws ParseException {
 
-        List<Appointment> appointmentList= appointmentRepository.findByDoctorId(id);
+        // get today
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+        Date dt = sf.parse(sf.format(new Date()));
+
+        List<Appointment> appointmentList= appointmentRepository.findByDoctorIdAndAppointmentDayEquals(id,dt);
+
         List<AppointmentWithPerson> appointmentWithPersonList= new ArrayList<>();
 
-        appointmentList.forEach(appointment -> {
+            appointmentList.forEach(appointment -> {
             AppointmentWithPerson appointmentWithPerson = new AppointmentWithPerson();
             appointmentWithPerson.setId(appointment.getId());
             appointmentWithPerson.setAppointmentMinute(appointment.getAppointmentMinute());
@@ -92,4 +101,11 @@ public class AppointmentServiceImpl implements AppointmentService {
 
         return appointmentWithDoctorList;
     }
+
+    @Override
+    public List<AppointmentProjection> getAppointmentByDoctor(Long id) {
+        return appointmentRepository.findProjectedByDoctorId(id);
+    }
+
+
 }

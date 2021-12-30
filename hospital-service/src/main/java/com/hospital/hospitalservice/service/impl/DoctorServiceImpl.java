@@ -63,7 +63,7 @@ public class DoctorServiceImpl  implements DoctorService {
 
         Mono<Object[]> response =webClientBuilder.build()
                 .get()
-                .uri("http://APPOINTMENT-SERVICE/appointment/getAppointmentByDoctor/"+id)
+                .uri("http://APPOINTMENT-SERVICE/appointment/getTodayAppointmentWithUserByDoctor/"+id)
                 .retrieve()
                 .bodyToMono(Object[].class).log();
         Object[] objects = response.block();
@@ -74,7 +74,7 @@ public class DoctorServiceImpl  implements DoctorService {
                 .map(object -> mapper.convertValue(object,AppointmentWithPerson.class))
                 .collect(Collectors.toList());
 
-        doctorWithAppointment.setAppointmentWithPersonList(appointmentWithDoctorList);
+        doctorWithAppointment.setAppointmentList(appointmentWithDoctorList);
         return doctorWithAppointment;
     }
 }

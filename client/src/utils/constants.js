@@ -34,3 +34,5 @@ export const FIND_DOCTOR_WITH_APPOINTMENT_URL =
 export const DELETE_APPOINTMENT_URL = "/appointment/delete/";
 
 export const FIND_ALL_PERSON_URL = "auth/findAllPerson";
+
+export const SET_AS_DOCTOR_URL = "auth/setAsDoctor/";

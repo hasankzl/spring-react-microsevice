@@ -22,6 +22,7 @@ import Deposits from "./Deposits";
 import Orders from "./Orders";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Doctor from "./Doctor/Doctor";
+import User from "./User/User";
 import Department from "./Department/Department";
 import { LANG_TR, LANG_EN } from "utils/constants";
 import i18n from "i18n";
@@ -30,13 +31,8 @@ import { useTranslation } from "react-i18next";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import ListSubheader from "@mui/material/ListSubheader";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PeopleIcon from "@mui/icons-material/People";
-import BarChartIcon from "@mui/icons-material/BarChart";
-import LayersIcon from "@mui/icons-material/Layers";
-import AssignmentIcon from "@mui/icons-material/Assignment";
 
 function Copyright(props) {
   return (
@@ -200,6 +196,13 @@ function DashboardContent() {
               </ListItemIcon>
               <ListItemText primary={t("dashboard.doctors")} />
             </ListItem>
+
+            <ListItem button component={Link} to="./user">
+              <ListItemIcon>
+                <PeopleIcon />
+              </ListItemIcon>
+              <ListItemText primary={t("dashboard.users")} />
+            </ListItem>
             {mainListItems}
           </List>
           <Divider />
@@ -221,6 +224,7 @@ function DashboardContent() {
           <Routes>
             <Route path="/doctor" element={<Doctor />} />
             <Route path="/department" element={<Department />} />
+            <Route path="/user" element={<User />} />
           </Routes>
         </Box>
       </Box>

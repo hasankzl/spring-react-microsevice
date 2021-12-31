@@ -3,6 +3,7 @@ package com.hospital.authservice.resource;
 import com.hospital.authservice.exception.DuplicateUserException;
 import com.hospital.authservice.model.*;
 import com.hospital.authservice.projection.PersonProjection;
+import com.hospital.authservice.projection.SimplePersonProjection;
 import com.hospital.authservice.service.PersonService;
 import com.hospital.authservice.service.UserService;
 import com.hospital.authservice.security.JWTUtility;
@@ -14,7 +15,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import javax.ws.rs.Path;
 import java.util.List;
 
 @RestController
@@ -75,7 +75,7 @@ public class AuthResource {
 
 
     @GetMapping("/getUserWithAppointment")
-    public UserWithAppointment getUserWithAppoinment(@RequestHeader("userId") Long userId) {
+    public PersonWithAppointment getUserWithAppoinment(@RequestHeader("userId") Long userId) {
         return personService.getUserWithAppointment(userId);
     }
 
@@ -85,15 +85,20 @@ public class AuthResource {
         return personService.findById(id);
     }
 
-    @GetMapping("/setAsDoctor/{userId}/{doctorId}")
+    @PostMapping("/setAsDoctor/{userId}/{doctorId}")
     public void setAsDoctor(@PathVariable Long userId, @PathVariable Long doctorId){
 
          personService.setUserAsDoctor(userId,doctorId);
     }
 
 
-        @GetMapping("/findAllPerson")
-    public List<PersonProjection> findAll(){
+    @GetMapping("/findAllPersonSimple")
+    public List<SimplePersonProjection> findAllSimple(){
+        return personService.findAllSimple();
+    }
+
+    @GetMapping("/findAllPerson")
+    public List<PersonWithDoctor> findAll(){
 
         return personService.findAll();
     }

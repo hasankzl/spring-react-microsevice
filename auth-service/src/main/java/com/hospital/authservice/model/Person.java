@@ -23,6 +23,7 @@ public class Person {
 
     @Column(name="surname", length=25, nullable=false)
     private String surname;
+
     @Column(name="password",  nullable=false)
     private String password;
 

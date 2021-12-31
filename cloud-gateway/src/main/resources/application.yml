@@ -9,13 +9,6 @@ spring:
     name: API-GATEWAY
   cloud:
     gateway:
-      globalcors:
-        corsConfigurations:
-          '[/**]':
-            allowOrigins: "*"
-            allowedMethods:
-              - GET
-              - POST
       routes:
         - id: AUTH-SERVICE
           uri: lb://AUTH-SERVICE

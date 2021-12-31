@@ -5,6 +5,7 @@ import com.hospital.hospitalservice.model.Doctor;
 import com.hospital.hospitalservice.payload.DoctorWithAppointment;
 import com.hospital.hospitalservice.projection.DoctorAppointmentProjection;
 import com.hospital.hospitalservice.projection.DoctorProjection;
+import com.hospital.hospitalservice.projection.SimpleDoctorProjection;
 import com.hospital.hospitalservice.service.DoctorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -45,6 +46,12 @@ public class DoctorResource {
         return doctorService.findById(id);
     }
 
+    @GetMapping("/findSimpleById/{id}")
+    public SimpleDoctorProjection findSimpleById(@PathVariable Long id){
+        return doctorService.findByIdSimple(id);
+    }
+
+
     @GetMapping("/findAllByDepartment/{id}")
     public List<DoctorAppointmentProjection> findAllByDepartment(@PathVariable Long id){
         return doctorService.findAllAppointmentProjection(id);
@@ -55,4 +62,6 @@ public class DoctorResource {
 
         return  doctorService.getDoctorWithAppointment(id);
     }
+
+
 }

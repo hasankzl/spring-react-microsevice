@@ -2,10 +2,9 @@ package com.hospital.authservice.service;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hospital.authservice.model.AppointmentWithDoctor;
-import com.hospital.authservice.model.Person;
-import com.hospital.authservice.model.UserWithAppointment;
+import com.hospital.authservice.model.*;
 import com.hospital.authservice.projection.PersonProjection;
+import com.hospital.authservice.projection.SimplePersonProjection;
 import com.hospital.authservice.repository.PersonRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -41,9 +40,9 @@ public class PersonService {
         return personRepository.findById(id).get();
     }
 
-    public UserWithAppointment getUserWithAppointment(Long userId){
+    public PersonWithAppointment getUserWithAppointment(Long userId){
 
-        UserWithAppointment userWithAppointment = new UserWithAppointment();
+        PersonWithAppointment personWithAppointment = new PersonWithAppointment();
         Mono<Object[]> response =webClientBuilder.build()
                 .get()
                 .uri("http://APPOINTMENT-SERVICE/appointment/getAppointmentByUser/"+userId)
@@ -57,11 +56,11 @@ public class PersonService {
                 .map(object -> mapper.convertValue(object,AppointmentWithDoctor.class))
                 .collect(Collectors.toList());
 
-        userWithAppointment.setAppointmentList(appointmentWithDoctorList);
+        personWithAppointment.setAppointmentList(appointmentWithDoctorList);
         Person person = findById(userId);
         person.setPassword("");
-        userWithAppointment.setPerson(person);
-        return userWithAppointment;
+        personWithAppointment.setPerson(person);
+        return personWithAppointment;
     }
 
     public void setUserAsDoctor(Long userId,Long doctorId){
@@ -73,8 +72,37 @@ public class PersonService {
         personRepository.save(person);
     }
 
-    public List<PersonProjection> findAll(){
+    public List<SimplePersonProjection> findAllSimple(){
 
-        return personRepository.findAllProjectedBy();
+
+        return personRepository.findAllProjectedSimpleBy();
+    }
+
+    public List<PersonWithDoctor> findAll(){
+        List<Person>  personList =personRepository.findAll();
+
+        List<PersonWithDoctor> personWithDoctorList = new ArrayList<>();
+
+        personList.forEach(person -> {
+            PersonWithDoctor personWithDoctor = new PersonWithDoctor();
+            person.setPassword("");
+            personWithDoctor.setPerson(person);
+
+            if(person.getDoctorId() !=null){
+
+                Doctor doctor =webClientBuilder.build()
+                        .get()
+                        .uri("http://HOSPITAL-SERVICE/hospital/doctor/findById/"+person.getDoctorId())
+                        .retrieve()
+                        .bodyToMono(Doctor.class).block();
+                personWithDoctor.setDoctor(doctor);
+            }
+
+            personWithDoctorList.add(personWithDoctor);
+        });
+
+
+        return personWithDoctorList;
+
     }
 }

@@ -6,6 +6,7 @@ import com.hospital.hospitalservice.payload.AppointmentWithPerson;
 import com.hospital.hospitalservice.payload.DoctorWithAppointment;
 import com.hospital.hospitalservice.projection.DoctorAppointmentProjection;
 import com.hospital.hospitalservice.projection.DoctorProjection;
+import com.hospital.hospitalservice.projection.SimpleDoctorProjection;
 import com.hospital.hospitalservice.repository.DoctorRepository;
 import com.hospital.hospitalservice.service.DoctorService;
 import lombok.RequiredArgsConstructor;
@@ -76,5 +77,10 @@ public class DoctorServiceImpl  implements DoctorService {
 
         doctorWithAppointment.setAppointmentList(appointmentWithDoctorList);
         return doctorWithAppointment;
+    }
+
+    @Override
+    public SimpleDoctorProjection findByIdSimple(Long id) {
+        return doctorRepository.findSimpleProjectedById(id);
     }
 }

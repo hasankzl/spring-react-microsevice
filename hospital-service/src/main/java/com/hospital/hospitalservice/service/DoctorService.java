@@ -4,6 +4,7 @@ import com.hospital.hospitalservice.model.Doctor;
 import com.hospital.hospitalservice.payload.DoctorWithAppointment;
 import com.hospital.hospitalservice.projection.DoctorAppointmentProjection;
 import com.hospital.hospitalservice.projection.DoctorProjection;
+import com.hospital.hospitalservice.projection.SimpleDoctorProjection;
 
 import java.util.List;
 
@@ -20,4 +21,6 @@ public interface DoctorService {
     List<DoctorAppointmentProjection> findAllAppointmentProjection(Long id);
 
     DoctorWithAppointment getDoctorWithAppointment(Long id);
+
+    SimpleDoctorProjection findByIdSimple(Long id);
 }

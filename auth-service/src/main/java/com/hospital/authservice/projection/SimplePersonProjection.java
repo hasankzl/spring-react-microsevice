@@ -1,6 +1,6 @@
 package com.hospital.authservice.projection;
 
-public interface PersonProjection {
+public interface SimplePersonProjection {
 
     Long getId();
 

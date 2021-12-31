@@ -1,10 +1,2 @@
-package com.hospital.authservice.projection;
-
-public interface PersonProjection {
-
-    Long getId();
-
-    String getName();
-
-    String getSurname();
+package com.hospital.authservice.projection;public interface PersonProjection {
 }

@@ -2,7 +2,8 @@ import axios from "axios";
 import { API_BASE_URL } from "./constants";
 import notification from "./notification";
 import { t } from "i18next";
-
+import { logoutAction } from "views/LoginPage/action";
+import store from "./store";
 axios.defaults.baseURL = API_BASE_URL;
 
 axios.interceptors.request.use((config) => {
@@ -31,9 +32,13 @@ axios.interceptors.response.use(
           notification.warning({
             message: error.response.data.message,
           });
-
           break;
-
+        case 401:
+          notification.warning({
+            message: "please login",
+          });
+          store.dispatch(logoutAction());
+          break;
         case 503:
           notification.warning({
             message: t("general.serviceNotActive"),

@@ -18,11 +18,11 @@ import { InputLabel } from "@material-ui/core";
 
 const useStyles = makeStyles(styles);
 
-export default function ProductSection() {
+export default function ProductSection({ message }) {
   const classes = useStyles();
   return (
     <div className={classes.section} style={{ padding: 10 }}>
-      <h2 className={classes.title}>Randevu Sistemi</h2>
+      <h2 className={classes.title}>{message}</h2>
     </div>
   );
 }

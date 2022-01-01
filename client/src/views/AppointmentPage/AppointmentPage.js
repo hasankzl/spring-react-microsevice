@@ -31,6 +31,7 @@ const AppointmentPage = ({
   nextPage: _nextPage,
   prevPage: _prevPage,
   setPage: _setPage,
+  isLogin,
 }) => {
   useEffect(() => {
     _clearReducer();
@@ -45,26 +46,34 @@ const AppointmentPage = ({
             className={classNames(classes.main, classes.mainRaised)}
             id="paper"
           >
-            <ProductSection />
+            {isLogin ? (
+              <>
+                <ProductSection message={"Randevu sayfası"} />
 
-            <GridItem xs={12} sm={12} md={12}>
-              <Carousel
-                index={carouselPage}
-                swipe={false}
-                indicators={false}
-                cycleNavigation={false}
-                autoPlay={false}
-                onChange={(row) => {
-                  _setPage(row);
-                }}
-                className={classes.carousel}
-              >
-                <DepartmentSelect />
+                <GridItem xs={12} sm={12} md={12}>
+                  <Carousel
+                    index={carouselPage}
+                    swipe={false}
+                    indicators={false}
+                    cycleNavigation={false}
+                    autoPlay={false}
+                    onChange={(row) => {
+                      _setPage(row);
+                    }}
+                    className={classes.carousel}
+                  >
+                    <DepartmentSelect />
 
-                <DoctorSelect />
-                <AppointmentSelect />
-              </Carousel>
-            </GridItem>
+                    <DoctorSelect />
+                    <AppointmentSelect />
+                  </Carousel>
+                </GridItem>
+              </>
+            ) : (
+              <ProductSection
+                message={"Randevu alabilmek için lütfen giriş yapınız"}
+              />
+            )}
           </div>
         </div>
       </Parallax>
@@ -73,9 +82,14 @@ const AppointmentPage = ({
   );
 };
 
-const mapStateToProps = ({ generalReducer, appointmentReducer }) => ({
+const mapStateToProps = ({
+  generalReducer,
+  appointmentReducer,
+  loginReducer,
+}) => ({
   departmentList: generalReducer.departmetList,
   carouselPage: appointmentReducer.carouselPage,
+  isLogin: loginReducer.isLogin,
 });
 
 const mapDispatchToProps = { clearReducer, nextPage, prevPage, setPage };

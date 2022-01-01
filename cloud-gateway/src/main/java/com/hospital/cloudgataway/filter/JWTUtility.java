@@ -1,6 +1,7 @@
 package com.hospital.cloudgataway.filter;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
@@ -49,8 +50,14 @@ public class JWTUtility implements Serializable {
 
     //check if the token has expired
     public Boolean isTokenExpired(String token) {
-        final Date expiration = getExpirationDateFromToken(token);
-        return expiration.before(new Date());
+        try{
+
+            final Date expiration = getExpirationDateFromToken(token);
+            return expiration.before(new Date());
+        }catch (ExpiredJwtException e){
+            // log here
+            return true;
+        }
     }
 
 

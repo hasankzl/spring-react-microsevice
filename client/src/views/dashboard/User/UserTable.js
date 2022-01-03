@@ -10,7 +10,7 @@ const columns = [
   { title: "İsim", field: "person.name" },
   { title: "Soyad", field: "person.surname" },
   { title: "email", field: "person.email" },
-
+  { title: "role", field: "person.role" },
   {
     title: "doctor",
     render: (rowData) => {
@@ -59,7 +59,7 @@ const UserTable = ({
             icon: "delete",
             tooltip: "Kayıt Sil",
             onClick: (event, rowData) => {
-              _deleteUser(rowData.id);
+              _deleteUser(rowData.person.id);
             },
           },
         ]}

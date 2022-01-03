@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -25,20 +25,36 @@ import work5 from "assets/img/examples/clem-onojegaw.jpg";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { connect } from "react-redux";
-import { getUser, deleteAppointment } from "./action";
+import {
+  getUser,
+  deleteAppointment,
+  getWeeklyAppoinmentForDoctor,
+} from "./action";
 import AppointmentSection from "./AppointmentSection";
+import { DOCTOR_ROLE } from "utils/constants";
 const useStyles = makeStyles(styles);
 
 const ProfilePage = ({
   getUser: _getUser,
   userWithAppointment,
   deleteAppointment: _deleteAppointment,
+  role,
 }) => {
   const classes = useStyles();
-
+  const [DoctorAppointmentList, setDoctorAppointmentList] = useState([]);
   useEffect(async () => {
     await _getUser();
   }, []);
+
+  useEffect(async () => {
+    if (role == DOCTOR_ROLE && DoctorAppointmentList.length < 1) {
+      const data = getWeeklyAppoinmentForDoctor(
+        userWithAppointment.person.doctorId
+      );
+      setDoctorAppointmentList(data);
+    }
+  }, [userWithAppointment]);
+
   const imageClasses = classNames(
     classes.imgRaised,
     classes.imgRoundedCircle,
@@ -54,6 +70,7 @@ const ProfilePage = ({
         image={require("assets/img/profile-bg.jpg").default}
       />
       <div className={classNames(classes.main, classes.mainRaised)}>
+        {role}
         <div>
           <div className={classes.container}>
             <GridContainer justify="center">
@@ -96,8 +113,9 @@ const ProfilePage = ({
   );
 };
 
-const mapStateToProps = ({ profileReducer }) => ({
+const mapStateToProps = ({ profileReducer, loginReducer }) => ({
   userWithAppointment: profileReducer.userWithAppointment,
+  role: loginReducer.role,
 });
 
 const mapDispatchToProps = { getUser, deleteAppointment };

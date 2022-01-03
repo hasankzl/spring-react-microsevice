@@ -15,6 +15,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     private final AppointmentRepository appointmentRepository;
 
     private final WebClient.Builder webClientBuilder;
+
     @Override
     public void save(Appointment appointment) {
 
@@ -41,43 +43,22 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public List<AppointmentWithPerson> geAppointmentWithPersonByDoctor(Long id) throws ParseException {
+    public List<AppointmentWithPerson> getTodayAppointmentWithUserByDoctor(Long id) throws ParseException {
 
         // get today
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
         Date dt = sf.parse(sf.format(new Date()));
 
-        List<Appointment> appointmentList= appointmentRepository.findByDoctorIdAndAppointmentDayEquals(id,dt);
+        List<Appointment> appointmentList = appointmentRepository.findByDoctorIdAndAppointmentDayEquals(id, dt);
 
-        List<AppointmentWithPerson> appointmentWithPersonList= new ArrayList<>();
-
-            appointmentList.forEach(appointment -> {
-            AppointmentWithPerson appointmentWithPerson = new AppointmentWithPerson();
-            appointmentWithPerson.setId(appointment.getId());
-            appointmentWithPerson.setAppointmentMinute(appointment.getAppointmentMinute());
-            appointmentWithPerson.setWorkHour(appointment.getWorkHour());
-            appointmentWithPerson.setAppointmentDay(appointment.getAppointmentDay());
-            Person person =
-                    webClientBuilder.build()
-                            .get()
-                            .uri("http://AUTH-SERVICE/auth/findPersonById/"+appointment.getUserId())
-                            .retrieve()
-                            .bodyToMono(Person.class)
-                            .block();
-
-            appointmentWithPerson.setPerson(person);
-            appointmentWithPersonList.add(appointmentWithPerson);
-
-        });
-
-        return appointmentWithPersonList;
+        return getAppointmentWithPerson(appointmentList);
 
     }
 
     @Override
-    public List<AppointmentWithDoctor> geAppointmentByUser(Long id) {
+    public List<AppointmentWithDoctor> getAppointmentByUser(Long id) {
 
-        List<Appointment> appointmentList =appointmentRepository.findByUserId(id);
+        List<Appointment> appointmentList = appointmentRepository.findByUserId(id);
         List<AppointmentWithDoctor> appointmentWithDoctorList = new ArrayList<>();
 
         appointmentList.forEach((appointment ->
@@ -89,11 +70,11 @@ public class AppointmentServiceImpl implements AppointmentService {
             appointmentWithDoctor.setId(appointment.getId());
             Doctor doctor =
                     webClientBuilder.build()
-                    .get()
-                    .uri("http://HOSPITAL-SERVICE/hospital/doctor/findById/"+appointment.getDoctorId())
-                    .retrieve()
-                    .bodyToMono(Doctor.class)
-                    .block();
+                            .get()
+                            .uri("http://HOSPITAL-SERVICE/hospital/doctor/findById/" + appointment.getDoctorId())
+                            .retrieve()
+                            .bodyToMono(Doctor.class)
+                            .block();
             appointmentWithDoctor.setDoctor(doctor);
             appointmentWithDoctorList.add(appointmentWithDoctor);
         }));
@@ -107,5 +88,47 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentRepository.findProjectedByDoctorId(id);
     }
 
+    @Override
+    public List<AppointmentWithPerson> getWeekAppointmentWithUserByDoctor(Long id) throws ParseException {
+        // get today
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+        Date dt = sf.parse(sf.format(new Date()));
 
+        // get one week after
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.WEEK_OF_YEAR, 1);
+        Date oneWeekAfter = sf.parse(sf.format(calendar.getTime()));
+
+
+        List<Appointment> appointmentList = appointmentRepository.findByDoctorIdAndAppointmentDayBetween(id, dt,oneWeekAfter);
+
+        return getAppointmentWithPerson(appointmentList);
+    }
+
+
+    private List<AppointmentWithPerson> getAppointmentWithPerson(List<Appointment> appointmentList) {
+
+        List<AppointmentWithPerson> appointmentWithPersonList = new ArrayList<>();
+
+        appointmentList.forEach(appointment -> {
+            AppointmentWithPerson appointmentWithPerson = new AppointmentWithPerson();
+            appointmentWithPerson.setId(appointment.getId());
+            appointmentWithPerson.setAppointmentMinute(appointment.getAppointmentMinute());
+            appointmentWithPerson.setWorkHour(appointment.getWorkHour());
+            appointmentWithPerson.setAppointmentDay(appointment.getAppointmentDay());
+            Person person =
+                    webClientBuilder.build()
+                            .get()
+                            .uri("http://AUTH-SERVICE/auth/findPersonById/" + appointment.getUserId())
+                            .retrieve()
+                            .bodyToMono(Person.class)
+                            .block();
+
+            appointmentWithPerson.setPerson(person);
+            appointmentWithPersonList.add(appointmentWithPerson);
+
+        });
+
+        return appointmentWithPersonList;
+    }
 }

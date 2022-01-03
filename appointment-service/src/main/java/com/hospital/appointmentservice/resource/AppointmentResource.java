@@ -44,12 +44,19 @@ public class AppointmentResource {
     @GetMapping("getTodayAppointmentWithUserByDoctor/{id}")
     private List<AppointmentWithPerson> getAppointmentWithUserByDoctor(@PathVariable Long id) throws ParseException {
 
-        return appointmentService.geAppointmentWithPersonByDoctor(id);
+        return appointmentService.getTodayAppointmentWithUserByDoctor(id);
     }
 
     @GetMapping("/getAppointmentByUser/{id}")
     private List<AppointmentWithDoctor> getAppointmentByUser(@PathVariable Long id){
 
-        return appointmentService.geAppointmentByUser(id);
+        return appointmentService.getAppointmentByUser(id);
     }
+
+    @GetMapping("getWeekAppointmentWithUserByDoctor/{id}")
+    private List<AppointmentWithPerson> getWeekAppointmentWithUserByDoctor(@PathVariable Long id) throws ParseException {
+
+        return appointmentService.getWeekAppointmentWithUserByDoctor(id);
+    }
+
 }

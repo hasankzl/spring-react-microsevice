@@ -4,6 +4,7 @@ export const ROLE = "role";
 export const REGISTER_URL = "auth/register";
 export const LOGIN_URL = "auth/login";
 export const ADMIN = "[admin]";
+export const DOCTOR_ROLE = "[doctor]";
 export const LANG_TR = "tr";
 export const LANG_EN = "en";
 export const CURRENT_LANG = "CURRENT_LANG";
@@ -36,3 +37,10 @@ export const DELETE_APPOINTMENT_URL = "/appointment/delete/";
 export const FIND_ALL_PERSON_URL = "auth/findAllPerson";
 
 export const SET_AS_DOCTOR_URL = "auth/setAsDoctor/";
+
+export const PERSON_DELETE_URL = "auth/deleteById/";
+
+export const DOCTOR_IMAGE_SAVE_URL = "hospital/uploadDoctorImage/";
+
+export const GET_WEEKLY_APPOINTMENT_FOR_DOCTOR_URL =
+  "/appointment/getWeekAppointmentWithUserByDoctor/";

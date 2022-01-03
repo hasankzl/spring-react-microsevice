@@ -12,6 +12,7 @@ import {
 } from "utils/constants";
 import notification from "utils/notification";
 import { t } from "i18next";
+import { DOCTOR_IMAGE_SAVE_URL } from "utils/constants";
 export const setEditDoctor = (doctor) => async (dispatch) => {
   dispatch({
     type: EDIT_DOCTOR,
@@ -71,4 +72,20 @@ export const findAllUser = () => async (dispatch) => {
       });
     }
   });
+};
+
+export const addImageToDoctor = async (file, id) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  await axios
+    .post(DOCTOR_IMAGE_SAVE_URL + id, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((res) => {
+      if (res.status == 200) {
+        notification.success({ message: "resim başarıyla eklenmiştir" });
+      }
+    });
 };

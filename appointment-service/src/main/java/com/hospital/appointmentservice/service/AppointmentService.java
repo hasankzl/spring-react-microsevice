@@ -16,10 +16,12 @@ public interface AppointmentService {
 
     void delete(Long id);
 
-    List<AppointmentWithPerson> geAppointmentWithPersonByDoctor(Long id) throws ParseException;
+    List<AppointmentWithPerson> getTodayAppointmentWithUserByDoctor(Long id) throws ParseException;
 
-    List<AppointmentWithDoctor> geAppointmentByUser(Long id);
+    List<AppointmentWithDoctor> getAppointmentByUser(Long id);
 
     List<AppointmentProjection> getAppointmentByDoctor(Long id);
+
+    List<AppointmentWithPerson> getWeekAppointmentWithUserByDoctor(Long id) throws ParseException;
 
 }

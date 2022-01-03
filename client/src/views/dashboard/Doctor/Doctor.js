@@ -6,6 +6,7 @@ import { Button } from "@material-ui/core";
 import DoctorTable from "./DoctorTable";
 import { findAllDepartment } from "../Department/action";
 import { findAllDoctor, findAllUser } from "./action";
+import ImageUploadModal from "./ImageUploadModal";
 const Doctor = ({
   findAllDepartment: _findAllDepartment,
   findAllDoctor: _findAllDoctor,
@@ -17,11 +18,18 @@ const Doctor = ({
     _findAllUser();
   }, []);
   const [modalShow, setModalShow] = useState(false);
-
+  const [imageModalShow, setImageModalShow] = useState(false);
   return (
     <div>
-      <DoctorTable openModal={() => setModalShow(true)} />
+      <DoctorTable
+        openModal={() => setModalShow(true)}
+        openImageModal={() => setImageModalShow(true)}
+      />
       <DoctorFormModal modalShow={modalShow} setModalShow={setModalShow} />
+      <ImageUploadModal
+        modalShow={imageModalShow}
+        setModalShow={setImageModalShow}
+      />
     </div>
   );
 };

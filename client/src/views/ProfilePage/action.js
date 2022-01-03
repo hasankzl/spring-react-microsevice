@@ -1,5 +1,6 @@
 import axios from "axios";
 import { FIND_USER_WITH_APPOINTMENT } from "utils/actionTypes";
+import { GET_WEEKLY_APPOINTMENT_FOR_DOCTOR_URL } from "utils/constants";
 import { DELETE_APPOINTMENT_URL } from "utils/constants";
 import { FIND_USER_WITH_APPOINTMENT_URL } from "utils/constants";
 
@@ -22,4 +23,16 @@ export const deleteAppointment = (id) => async (dispatch) => {
       dispatch(getUser());
     }
   });
+};
+
+export const getWeeklyAppoinmentForDoctor = async (id) => {
+  const data = await axios
+    .get(GET_WEEKLY_APPOINTMENT_FOR_DOCTOR_URL + id)
+    .then((res) => {
+      if (res.status === 200) {
+        return res.data;
+      }
+    });
+
+  return data;
 };

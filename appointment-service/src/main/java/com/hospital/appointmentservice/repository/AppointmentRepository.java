@@ -13,6 +13,7 @@ public interface AppointmentRepository  extends JpaRepository<Appointment,Long> 
 
     List<Appointment> findByDoctorIdAndAppointmentDayEquals(Long id,Date appointmentDate);
 
+    List<Appointment> findByDoctorIdAndAppointmentDayBetween(Long id,Date startDate,Date endDate);
 
     List<AppointmentProjection> findProjectedByDoctorId(Long id);
 

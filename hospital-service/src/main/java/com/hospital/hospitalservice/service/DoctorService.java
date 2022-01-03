@@ -23,4 +23,6 @@ public interface DoctorService {
     DoctorWithAppointment getDoctorWithAppointment(Long id);
 
     SimpleDoctorProjection findByIdSimple(Long id);
+
+    void setImage(Long id, String imgName);
 }

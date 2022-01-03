@@ -67,6 +67,7 @@ public class PersonService {
 
         Person person = findById(userId);
 
+        person.setRole("doctor");
         person.setDoctorId(doctorId);
 
         personRepository.save(person);
@@ -104,5 +105,11 @@ public class PersonService {
 
         return personWithDoctorList;
 
+    }
+
+
+
+    public void deleteById(Long id){
+        personRepository.deleteById(id);
     }
 }

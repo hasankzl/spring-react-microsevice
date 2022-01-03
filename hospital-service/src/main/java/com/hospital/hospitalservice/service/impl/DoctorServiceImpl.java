@@ -83,4 +83,13 @@ public class DoctorServiceImpl  implements DoctorService {
     public SimpleDoctorProjection findByIdSimple(Long id) {
         return doctorRepository.findSimpleProjectedById(id);
     }
+
+    @Override
+    public void setImage(Long id, String imgName) {
+        Doctor doctor = doctorRepository.findById(id).get();
+
+        doctor.setImg(imgName);
+
+        doctorRepository.save(doctor);
+    }
 }

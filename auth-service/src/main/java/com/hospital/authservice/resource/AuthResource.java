@@ -45,7 +45,9 @@ public class AuthResource {
     @PostMapping("/register")
     public void save(@RequestBody Person person) throws Exception {
         try {
+            person.setRole("user");
             personService.save(person);
+
         } catch (Exception e) {
             throw new DuplicateUserException();
         }
@@ -83,6 +85,12 @@ public class AuthResource {
     public Person findPersonById(@PathVariable Long id){
 
         return personService.findById(id);
+    }
+
+    @DeleteMapping("/deleteById/{id}")
+    public void deleteById(@PathVariable Long id){
+        
+        personService.deleteById(id);
     }
 
     @PostMapping("/setAsDoctor/{userId}/{doctorId}")

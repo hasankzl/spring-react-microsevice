@@ -18,6 +18,7 @@ const DoctorTable = ({
   doctorList,
   setEditDoctor: _setEditDoctor,
   openModal,
+  openImageModal,
   deleteDoctor: _deleteDoctor,
 }) => {
   return (
@@ -30,6 +31,14 @@ const DoctorTable = ({
           actionsColumnIndex: -1,
         }}
         actions={[
+          {
+            icon: "image",
+            tooltip: "Resim ekle/güncelle",
+            onClick: (event, rowData) => {
+              _setEditDoctor(rowData);
+              openImageModal();
+            },
+          },
           {
             icon: "add",
             tooltip: "Yeni Kayıt Ekle",
@@ -47,6 +56,7 @@ const DoctorTable = ({
               openModal();
             },
           },
+
           {
             icon: "delete",
             tooltip: "Kayıt Sil",

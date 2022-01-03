@@ -6,7 +6,7 @@ import {
 } from "utils/actionTypes";
 import { DOCTOR_FIND_ALL_URL } from "utils/constants";
 import {
-  DOCTOR_DELETE_URL,
+  PERSON_DELETE_URL,
   FIND_ALL_PERSON_URL,
   SET_AS_DOCTOR_URL,
 } from "utils/constants";
@@ -22,7 +22,7 @@ export const setEditUser = (user) => async (dispatch) => {
 };
 
 export const deleteUser = (id) => async (dispatch) => {
-  await axios.delete(DOCTOR_DELETE_URL + id).then((res) => {
+  await axios.delete(PERSON_DELETE_URL + id).then((res) => {
     if (res.status == 200) {
       notification.success({
         message: t("general.deleteSuccess"),

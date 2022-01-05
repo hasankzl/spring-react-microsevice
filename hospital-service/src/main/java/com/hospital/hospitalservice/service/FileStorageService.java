@@ -36,7 +36,7 @@ public class FileStorageService {
 
     public String storeFile(MultipartFile file,String prefix) {
         // Normalize file name
-        String fileName = "doctor-image-"+prefix+".png";
+        String fileName = prefix+".png";
 
         try {
             // Check if the file's name contains invalid characters

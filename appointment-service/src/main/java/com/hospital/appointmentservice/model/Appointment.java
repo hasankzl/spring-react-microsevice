@@ -19,7 +19,7 @@ public class Appointment {
 
     private Date createdDate = new Date();
 
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Europe/Istanbul")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date appointmentDay;
 
     private WORK_HOUR workHour;

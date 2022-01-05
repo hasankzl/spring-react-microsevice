@@ -38,6 +38,13 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
+    public void setImage(Long id, String filename) {
+        Department department = departmentRepository.findById(id).get();
+        department.setImg(filename);
+        departmentRepository.save(department);
+    }
+
+    @Override
     public List<DepartmentListProjection> findAllForList() {
         return departmentRepository.findAllProjectedListBy();
     }

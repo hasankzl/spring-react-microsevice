@@ -1,4 +1,7 @@
-import { FIND_USER_WITH_APPOINTMENT } from "utils/actionTypes";
+import {
+  FIND_USER_WITH_APPOINTMENT,
+  APPOINTMENT_FOR_DOCTOR,
+} from "utils/actionTypes";
 
 const initialState = {
   userWithAppointment: {
@@ -8,6 +11,7 @@ const initialState = {
     },
     appointmentList: [],
   },
+  appointmentForDoctor: [],
 };
 
 export default (state = initialState, action) => {
@@ -16,6 +20,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         userWithAppointment: { ...action.payload.data },
+      };
+    case APPOINTMENT_FOR_DOCTOR:
+      return {
+        ...state,
+        appointmentForDoctor: action.payload.data,
       };
     default:
       return state;

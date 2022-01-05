@@ -16,42 +16,12 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-
+import {
+  appoinmentTimes,
+  appoinmentHours,
+  getNextFiveDayWithoutWeekend,
+} from "utils/constants";
 const useStyles = makeStyles(styles);
-
-var dateObj = new Date();
-const nextFiveDayWithoutWeekend = [];
-for (let i = 0; nextFiveDayWithoutWeekend.length <= 4; i++) {
-  var weekday = dateObj.toLocaleString("default", { weekday: "long" });
-
-  if (weekday != "Saturday" || weekday != "Sunday") {
-    nextFiveDayWithoutWeekend.push({
-      date: dateObj.toISOString().split("T")[0],
-      weekday,
-    });
-  }
-  dateObj.setDate(dateObj.getDate() + 1);
-}
-
-const appoinmentTimes = [
-  { name: "ZERO", value: "00" },
-  { name: "TEN", value: "10" },
-  { name: "TWENTY", value: "20" },
-  { name: "THIRTY", value: "30" },
-  { name: "FOURTY", value: "40" },
-  { name: "FIVETY", value: "50" },
-];
-const appoinmentHours = [
-  { name: "NINE", value: "09" },
-  { name: "TEN", value: "10" },
-  { name: "ELEVEN", value: "11" },
-  { name: "TWELVE", value: "12" },
-  { name: "FOURTEEN", value: "13" },
-  { name: "FIFTEEN", value: "14" },
-  { name: "SIXTEEN", value: "15" },
-  { name: "SEVENTEEN", value: "16" },
-  { name: "EIGHTEEN", value: "17" },
-];
 
 const emptySelectedDateHour = {
   date: "",
@@ -64,7 +34,7 @@ const emptySelectedMinute = {
   name: "",
   value: "",
 };
-console.log(nextFiveDayWithoutWeekend);
+
 const AppointmentSelect = ({
   selectedDoctor,
   selectedDepartment,
@@ -119,15 +89,15 @@ const AppointmentSelect = ({
           </Card>
         </GridItem>
       </GridContainer>
-      {nextFiveDayWithoutWeekend.map((date, index) => (
+      {getNextFiveDayWithoutWeekend().map((date, index) => (
         <GridContainer spacing={2} key={index}>
           <GridItem md={12}>
             <Card className={classes.root} style={{ display: "flex" }}>
-              <CardHeader avatar={date.weekday} />
+              <CardHeader avatar={`${date.weekday} ${date.date}`} />
               <div style={{ display: "flex", marginLeft: "auto" }}>
                 {appoinmentHours.map((hour) => {
                   const isSelected =
-                    selectedDateHour.date == date &&
+                    selectedDateHour.date.date == date.date &&
                     selectedDateHour.hour.name == hour.name;
                   return (
                     <Button
@@ -145,14 +115,17 @@ const AppointmentSelect = ({
               </div>
             </Card>
           </GridItem>
-          {selectedDateHour.date == date ? (
+          {selectedDateHour.date.date == date.date ? (
             <GridItem md={12}>
               <div style={{ display: "flex", justifyContent: "space-evenly" }}>
                 {appoinmentTimes.map((minute) => {
+                  debugger;
                   const isSelectedBefore = appointmentList.some(
                     (app) =>
                       app.appointmentMinute == minute.name &&
-                      app.workHour == selectedDateHour.hour.name
+                      app.workHour == selectedDateHour.hour.name &&
+                      app.appointmentDay.substring(0, 10) ==
+                        selectedDateHour.date.date
                   );
                   return (
                     <Button

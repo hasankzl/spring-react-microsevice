@@ -4,6 +4,7 @@ import {
   DEPARTMENT_SAVE_URL,
   DEPARTMENT_FIND_ALL_URL,
   DEPARTMENT_DELETE_URL,
+  DEPARTMENT_IMAGE_SAVE_URL,
 } from "utils/constants";
 import notification from "utils/notification";
 import { t } from "i18next";
@@ -56,4 +57,20 @@ export const findAllDepartment = () => async (dispatch) => {
       });
     }
   });
+};
+
+export const addImageToDepartment = async (file, id) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  await axios
+    .post(DEPARTMENT_IMAGE_SAVE_URL + id, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((res) => {
+      if (res.status == 200) {
+        notification.success({ message: "resim başarıyla eklenmiştir" });
+      }
+    });
 };

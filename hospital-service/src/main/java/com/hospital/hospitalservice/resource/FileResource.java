@@ -1,6 +1,7 @@
 package com.hospital.hospitalservice.resource;
 
 import com.hospital.hospitalservice.payload.UploadFileResponse;
+import com.hospital.hospitalservice.service.DepartmentService;
 import com.hospital.hospitalservice.service.DoctorService;
 import com.hospital.hospitalservice.service.FileStorageService;
 import lombok.extern.slf4j.Slf4j;
@@ -31,12 +32,31 @@ public class FileResource {
     @Autowired
     private DoctorService doctorService;
 
+    @Autowired
+    private DepartmentService departmentService;
+
     @PostMapping("/uploadDoctorImage/{doctorId}")
     public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file,@PathVariable Long doctorId) {
 
-        String fileName = fileStorageService.storeFile(file,doctorId.toString());
+        String fileName = fileStorageService.storeFile(file,"doctor-image-"+doctorId.toString());
 
         doctorService.setImage(doctorId,fileName);
+
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/downloadFile/")
+                .path(fileName)
+                .toUriString();
+
+        return new UploadFileResponse(fileName, fileDownloadUri,
+                file.getContentType(), file.getSize());
+    }
+
+    @PostMapping("/uploadDepartmentImage/{departmentId}")
+    public UploadFileResponse uploadDepartmentImage(@RequestParam("file") MultipartFile file,@PathVariable Long departmentId) {
+
+        String fileName = fileStorageService.storeFile(file,"department-image-"+departmentId.toString());
+
+     departmentService.setImage(departmentId,fileName);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")

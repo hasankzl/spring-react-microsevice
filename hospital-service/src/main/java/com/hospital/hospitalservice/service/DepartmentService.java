@@ -19,5 +19,6 @@ public interface DepartmentService {
 
     DepartmentPageProjection findById(Long id);
 
+    void setImage(Long id,String filename);
     List<DepartmentListProjection> findAllForList();
 }

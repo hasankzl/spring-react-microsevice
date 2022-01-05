@@ -42,5 +42,44 @@ export const PERSON_DELETE_URL = "auth/deleteById/";
 
 export const DOCTOR_IMAGE_SAVE_URL = "hospital/uploadDoctorImage/";
 
+export const DEPARTMENT_IMAGE_SAVE_URL = "hospital/uploadDepartmentImage/";
+
 export const GET_WEEKLY_APPOINTMENT_FOR_DOCTOR_URL =
   "/appointment/getWeekAppointmentWithUserByDoctor/";
+
+export const appoinmentTimes = [
+  { name: "ZERO", value: "00" },
+  { name: "TEN", value: "10" },
+  { name: "TWENTY", value: "20" },
+  { name: "THIRTY", value: "30" },
+  { name: "FOURTY", value: "40" },
+  { name: "FIVETY", value: "50" },
+];
+export const appoinmentHours = [
+  { name: "NINE", value: "09" },
+  { name: "TEN", value: "10" },
+  { name: "ELEVEN", value: "11" },
+  { name: "TWELVE", value: "12" },
+  { name: "FOURTEEN", value: "13" },
+  { name: "FIFTEEN", value: "14" },
+  { name: "SIXTEEN", value: "15" },
+  { name: "SEVENTEEN", value: "16" },
+  { name: "EIGHTEEN", value: "17" },
+];
+
+export const getNextFiveDayWithoutWeekend = () => {
+  var dateObj = new Date();
+  const nextFiveDayWithoutWeekend = [];
+  for (let i = 0; nextFiveDayWithoutWeekend.length <= 4; i++) {
+    var weekday = dateObj.toLocaleString("default", { weekday: "long" });
+    if (weekday != "Saturday" && weekday != "Sunday") {
+      nextFiveDayWithoutWeekend.push({
+        date: dateObj.toISOString().split("T")[0],
+        weekday,
+      });
+    }
+    dateObj.setDate(dateObj.getDate() + 1);
+  }
+
+  return nextFiveDayWithoutWeekend;
+};

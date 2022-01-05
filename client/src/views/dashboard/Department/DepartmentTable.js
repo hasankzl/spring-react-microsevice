@@ -13,6 +13,7 @@ const DepartmentTable = ({
   setEditDepartment: _setEditDepartment,
   openModal,
   deleteDepartment: _deleteDepartment,
+  openImageModal,
 }) => {
   const { t } = useTranslation();
 
@@ -31,6 +32,14 @@ const DepartmentTable = ({
           actionsColumnIndex: -1,
         }}
         actions={[
+          {
+            icon: "image",
+            tooltip: "Resim ekle/güncelle",
+            onClick: (event, rowData) => {
+              _setEditDepartment(rowData);
+              openImageModal();
+            },
+          },
           {
             icon: "add",
             tooltip: t("general.addNewRecord"),

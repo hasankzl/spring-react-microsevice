@@ -4,24 +4,13 @@ import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
-import Camera from "@material-ui/icons/Camera";
-import Palette from "@material-ui/icons/Palette";
-import Favorite from "@material-ui/icons/Favorite";
-// core components
 import Footer from "components/Footer/Footer.js";
 import Button from "components/CustomButtons/Button.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
 
 import profile from "assets/img/faces/christian.jpg";
-import EventNoteIcon from "@mui/icons-material/EventNote";
-import work1 from "assets/img/examples/olu-eletu.jpg";
-import work2 from "assets/img/examples/clem-onojeghuo.jpg";
-import work3 from "assets/img/examples/cynthia-del-rio.jpg";
-import work4 from "assets/img/examples/mariya-georgieva.jpg";
-import work5 from "assets/img/examples/clem-onojegaw.jpg";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { connect } from "react-redux";
@@ -32,6 +21,7 @@ import {
 } from "./action";
 import AppointmentSection from "./AppointmentSection";
 import { DOCTOR_ROLE } from "utils/constants";
+import DoctorSchedule from "./DoctorSchedule";
 const useStyles = makeStyles(styles);
 
 const ProfilePage = ({
@@ -39,19 +29,16 @@ const ProfilePage = ({
   userWithAppointment,
   deleteAppointment: _deleteAppointment,
   role,
+  getWeeklyAppoinmentForDoctor: _getWeeklyAppoinmentForDoctor,
 }) => {
   const classes = useStyles();
-  const [DoctorAppointmentList, setDoctorAppointmentList] = useState([]);
   useEffect(async () => {
     await _getUser();
   }, []);
 
   useEffect(async () => {
-    if (role == DOCTOR_ROLE && DoctorAppointmentList.length < 1) {
-      const data = getWeeklyAppoinmentForDoctor(
-        userWithAppointment.person.doctorId
-      );
-      setDoctorAppointmentList(data);
+    if (role == DOCTOR_ROLE && userWithAppointment.person.doctorId) {
+      _getWeeklyAppoinmentForDoctor(userWithAppointment.person.doctorId);
     }
   }, [userWithAppointment]);
 
@@ -100,7 +87,7 @@ const ProfilePage = ({
             <div className={classes.description}>
               <p></p>
             </div>
-
+            {role == DOCTOR_ROLE && <DoctorSchedule />}
             <AppointmentSection
               appointmentList={userWithAppointment.appointmentList}
               deleteAppointment={_deleteAppointment}
@@ -118,6 +105,10 @@ const mapStateToProps = ({ profileReducer, loginReducer }) => ({
   role: loginReducer.role,
 });
 
-const mapDispatchToProps = { getUser, deleteAppointment };
+const mapDispatchToProps = {
+  getUser,
+  deleteAppointment,
+  getWeeklyAppoinmentForDoctor,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

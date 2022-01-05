@@ -52,7 +52,7 @@ const DepartmentPage = (props) => {
       >
         <div className={classes.container}>
           <GridContainer>
-            <GridItem xs={12} sm={12} md={6}>
+            <GridItem xs={12} sm={12} md={9}>
               <h1 className={classes.title}>{department.name}</h1>
               <h4>
                 <div
@@ -77,7 +77,6 @@ const DepartmentPage = (props) => {
       </Parallax>
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
-          <ProductSection />
           <TeamSection doctorList={department.doctorList} />
         </div>
       </div>

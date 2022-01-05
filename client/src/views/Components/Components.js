@@ -37,7 +37,7 @@ export default function Components(props) {
   const { ...rest } = props;
   return (
     <div>
-      <Parallax image={require("assets/img/bg4.jpg").default}>
+      <Parallax image={require("../../general-images/home-page.jpg").default}>
         <div className={classes.container}>
           <GridContainer>
             <GridItem>

@@ -31,7 +31,10 @@ export default function LandingPage(props) {
   const { ...rest } = props;
   return (
     <div>
-      <Parallax filter image={require("assets/img/landing-bg.jpg").default}>
+      <Parallax
+        filter
+        image={require("../../general-images/home-page.jpg").default}
+      >
         <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>

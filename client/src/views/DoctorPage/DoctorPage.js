@@ -38,11 +38,16 @@ const DoctorPage = (props) => {
   const { ...rest } = props;
   return (
     <div>
-      <Parallax filter image={require("assets/img/landing-bg.jpg").default}>
+      <Parallax
+        filter
+        image={require("../../general-images/doctor-page.jpg").default}
+      >
         <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
-              <h1 className={classes.title}>Your Story Starts With Us.</h1>
+              <h1 className={classes.title}>
+                Dünya çapında popüler doktorlara sahibiz
+              </h1>
               <h4>
                 Every landing page needs a small description after the big bold
                 title, that{"'"}s why we added this text here. Add here all the
@@ -66,7 +71,6 @@ const DoctorPage = (props) => {
       </Parallax>
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
-          <ProductSection />
           <TeamSection doctorList={doctorList} />
         </div>
       </div>

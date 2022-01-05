@@ -45,7 +45,7 @@ const DoctorProfile = ({
       <Parallax
         small
         filter
-        image={require("assets/img/profile-bg.jpg").default}
+        image={require("../../general-images/doctor-page.jpg").default}
       />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>

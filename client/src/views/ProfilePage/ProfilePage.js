@@ -18,6 +18,7 @@ import {
   getUser,
   deleteAppointment,
   getWeeklyAppoinmentForDoctor,
+  getAnalysisForPerson,
 } from "./action";
 import AppointmentSection from "./AppointmentSection";
 import { DOCTOR_ROLE } from "utils/constants";
@@ -30,6 +31,7 @@ const ProfilePage = ({
   deleteAppointment: _deleteAppointment,
   role,
   getWeeklyAppoinmentForDoctor: _getWeeklyAppoinmentForDoctor,
+  getAnalysisForPerson: _getAnalysisForPerson,
 }) => {
   const classes = useStyles();
   useEffect(async () => {
@@ -40,6 +42,9 @@ const ProfilePage = ({
     if (role == DOCTOR_ROLE && userWithAppointment.person.doctorId) {
       _getWeeklyAppoinmentForDoctor(userWithAppointment.person.doctorId);
     }
+    if (userWithAppointment.person.id) {
+      await _getAnalysisForPerson(userWithAppointment.person.id);
+    }
   }, [userWithAppointment]);
 
   const imageClasses = classNames(
@@ -49,6 +54,10 @@ const ProfilePage = ({
   );
 
   const { person } = userWithAppointment;
+
+  const img = person.doctorId
+    ? require("../../images/doctor-image-" + person.doctorId + ".png").default
+    : require("assets/img/profile-bg.jpg").default;
   return (
     <div>
       <Parallax
@@ -64,7 +73,7 @@ const ProfilePage = ({
               <GridItem xs={12} sm={12} md={6}>
                 <div className={classes.profile}>
                   <div>
-                    <img src={profile} alt="..." className={imageClasses} />
+                    <img src={img} alt="..." className={imageClasses} />
                   </div>
                   <div className={classes.name}>
                     <h3
@@ -109,6 +118,7 @@ const mapDispatchToProps = {
   getUser,
   deleteAppointment,
   getWeeklyAppoinmentForDoctor,
+  getAnalysisForPerson,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

@@ -54,7 +54,15 @@ const DoctorProfile = ({
               <GridItem xs={12} sm={12} md={6}>
                 <div className={classes.profile}>
                   <div>
-                    <img src={profile} alt="..." className={imageClasses} />
+                    <img
+                      src={
+                        require("../../images/doctor-image-" +
+                          doctor.id +
+                          ".png").default
+                      }
+                      alt="..."
+                      className={imageClasses}
+                    />
                   </div>
                   <div className={classes.name}>
                     <h3

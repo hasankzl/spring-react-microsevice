@@ -40,7 +40,15 @@ export default function TeamSection({ doctorList }) {
             <GridItem xs={12} sm={12} md={4} key={index}>
               <Card plain>
                 <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
-                  <img src={team1} alt="..." className={imageClasses} />
+                  <img
+                    src={
+                      require("../../images/doctor-image-" + doctor.id + ".png")
+                        .default
+                    }
+                    alt="..."
+                    style={{ maxHeight: 160 }}
+                    className={imageClasses}
+                  />
                 </GridItem>
                 <h4 className={classes.cardTitle}>
                   {doctor.name} {doctor.surname}

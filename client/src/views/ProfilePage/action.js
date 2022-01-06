@@ -1,8 +1,10 @@
 import axios from "axios";
+import { SET_ANALYSIS_FOR_USER } from "utils/actionTypes";
 import {
   FIND_USER_WITH_APPOINTMENT,
   APPOINTMENT_FOR_DOCTOR,
 } from "utils/actionTypes";
+import { GET_ANALYSIS_FOR_PERSON_URL } from "utils/constants";
 import { GET_WEEKLY_APPOINTMENT_FOR_DOCTOR_URL } from "utils/constants";
 import { DELETE_APPOINTMENT_URL } from "utils/constants";
 import { FIND_USER_WITH_APPOINTMENT_URL } from "utils/constants";
@@ -36,6 +38,17 @@ export const getWeeklyAppoinmentForDoctor = (id) => async (dispatch) => {
         payload: {
           data: res.data,
         },
+      });
+    }
+  });
+};
+
+export const getAnalysisForPerson = (id) => async (dispatch) => {
+  await axios.get(GET_ANALYSIS_FOR_PERSON_URL + id).then((res) => {
+    if (res.status === 200) {
+      dispatch({
+        type: SET_ANALYSIS_FOR_USER,
+        payload: res.data,
       });
     }
   });

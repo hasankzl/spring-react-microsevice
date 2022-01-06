@@ -47,6 +47,8 @@ export const DEPARTMENT_IMAGE_SAVE_URL = "hospital/uploadDepartmentImage/";
 export const GET_WEEKLY_APPOINTMENT_FOR_DOCTOR_URL =
   "/appointment/getWeekAppointmentWithUserByDoctor/";
 
+export const GET_ANALYSIS_FOR_PERSON_URL = "/analysis/getAnalysisForPerson/";
+
 export const appoinmentTimes = [
   { name: "ZERO", value: "00" },
   { name: "TEN", value: "10" },

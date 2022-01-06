@@ -1,5 +1,6 @@
 import {
   FIND_USER_WITH_APPOINTMENT,
+  SET_ANALYSIS_FOR_USER,
   APPOINTMENT_FOR_DOCTOR,
 } from "utils/actionTypes";
 
@@ -25,6 +26,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         appointmentForDoctor: action.payload.data,
+      };
+    case SET_ANALYSIS_FOR_USER:
+      return {
+        ...state,
+        analysisForUser: action.payload.data,
       };
     default:
       return state;

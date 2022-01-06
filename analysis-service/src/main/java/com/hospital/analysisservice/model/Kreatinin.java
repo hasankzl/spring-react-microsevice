@@ -3,24 +3,22 @@ package com.hospital.analysisservice.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.lang.annotation.Target;
 import java.util.Date;
 
+@Data
 @Entity
 @Table
-@Data
-public class BloodType {
+public class Kreatinin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private BLOOD_TYPE blood_type;
+    private Long kreatin;
 
-    private Date createdDate = new Date();
+    private Long egrf;
 
-    @Column(unique = true)
     private Long personId;
 
+    private Date createdDate= new Date();
 }

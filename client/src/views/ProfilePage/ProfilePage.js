@@ -23,6 +23,7 @@ import {
 import AppointmentSection from "./AppointmentSection";
 import { DOCTOR_ROLE } from "utils/constants";
 import DoctorSchedule from "./DoctorSchedule";
+import AnalysisSection from "./AnalysisSection";
 const useStyles = makeStyles(styles);
 
 const ProfilePage = ({
@@ -66,7 +67,6 @@ const ProfilePage = ({
         image={require("assets/img/profile-bg.jpg").default}
       />
       <div className={classNames(classes.main, classes.mainRaised)}>
-        {role}
         <div>
           <div className={classes.container}>
             <GridContainer justify="center">
@@ -97,6 +97,7 @@ const ProfilePage = ({
               <p></p>
             </div>
             {role == DOCTOR_ROLE && <DoctorSchedule />}
+            <AnalysisSection />
             <AppointmentSection
               appointmentList={userWithAppointment.appointmentList}
               deleteAppointment={_deleteAppointment}

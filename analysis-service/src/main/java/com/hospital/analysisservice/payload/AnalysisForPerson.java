@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 public class AnalysisForPerson {
 
-    BloodType bloodType;
+    List<BloodType> bloodType;
 
     List<Hemogram> hemogramList;
 

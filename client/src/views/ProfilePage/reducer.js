@@ -13,6 +13,9 @@ const initialState = {
     appointmentList: [],
   },
   appointmentForDoctor: [],
+  analysisForUser: {
+    bloodType: [],
+  },
 };
 
 export default (state = initialState, action) => {
@@ -30,7 +33,7 @@ export default (state = initialState, action) => {
     case SET_ANALYSIS_FOR_USER:
       return {
         ...state,
-        analysisForUser: action.payload.data,
+        analysisForUser: { ...action.payload.data },
       };
     default:
       return state;

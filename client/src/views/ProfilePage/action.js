@@ -48,7 +48,9 @@ export const getAnalysisForPerson = (id) => async (dispatch) => {
     if (res.status === 200) {
       dispatch({
         type: SET_ANALYSIS_FOR_USER,
-        payload: res.data,
+        payload: {
+          data: res.data,
+        },
       });
     }
   });

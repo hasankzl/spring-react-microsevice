@@ -101,3 +101,5 @@ mvnw.cmd
 .mvn/
 
 mvnw
+### image upload folder ###
+client/src/images

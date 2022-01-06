@@ -5,6 +5,8 @@ import com.hospital.analysisservice.service.BloodTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/bloodType")
 @RequiredArgsConstructor
@@ -20,7 +22,7 @@ public class BloodTypeResource {
     }
 
     @GetMapping("/findByPersonId/{personId}")
-    public BloodType findByPersonId(@PathVariable Long personId){
+    public List<BloodType> findByPersonId(@PathVariable Long personId){
 
         return bloodTypeService.findByPersonId(personId);
     }

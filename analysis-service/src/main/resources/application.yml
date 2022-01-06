@@ -1,5 +1,7 @@
 server:
   port: 9005
+  servlet:
+    context-path: /analysis
 
 spring:
   application:
